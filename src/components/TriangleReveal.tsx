@@ -9,127 +9,78 @@ interface Triangle {
   delay: number;
 }
 
-interface Line {
-  id: number;
-  x1: number;
-  y1: number;
-  x2: number;
-  y2: number;
-  delay: number;
-}
-
 export default function TriangleReveal({
   onComplete,
 }: {
   onComplete: () => void;
 }) {
   const [triangles, setTriangles] = useState<Triangle[]>([]);
-  const [lines, setLines] = useState<Line[]>([]);
-  const [showLines, setShowLines] = useState(false);
   const [showTriangles, setShowTriangles] = useState(false);
 
   useEffect(() => {
-    // Generate diagonal grid lines
-    const newLines: Line[] = [];
-    const spacing = 100;
-    let id = 0;
+    // Generate triangles immediately
+    const triangleWidth = 200; // Set to 200px wide
+    const triangleHeight = 100; // 2:1 ratio - wider than tall
 
-    // Diagonal lines going one direction
-    for (let i = -window.innerHeight; i < window.innerWidth + window.innerHeight; i += spacing) {
-      newLines.push({
-        id: id++,
-        x1: i,
-        y1: 0,
-        x2: i + window.innerHeight,
-        y2: window.innerHeight,
-        delay: Math.random() * 0.1,
-      });
-    }
+    const cols = Math.ceil(window.innerWidth / triangleWidth) + 4;
+    const rows = Math.ceil(window.innerHeight / triangleHeight) + 4;
 
-    // Diagonal lines going the other direction
-    for (let i = 0; i < window.innerWidth + window.innerHeight; i += spacing) {
-      newLines.push({
-        id: id++,
-        x1: i,
-        y1: 0,
-        x2: i - window.innerHeight,
-        y2: window.innerHeight,
-        delay: Math.random() * 0.1,
-      });
-    }
+    const newTriangles: Triangle[] = [];
+    let triangleId = 0;
 
-    setLines(newLines);
-    setShowLines(true);
+    // Create overlapping grid to eliminate all gaps
+    for (let row = -2; row < rows; row++) {
+      for (let col = -2; col < cols; col++) {
+        const x = col * triangleWidth;
+        const y = row * triangleHeight;
 
-    // After lines, show triangles
-    setTimeout(() => {
-      setShowLines(false);
+        // Base triangles
+        newTriangles.push({
+          id: triangleId++,
+          x: x,
+          y: y,
+          size: triangleWidth + 2, // Slight overlap
+          inverted: false,
+          delay: Math.random() * 0.7,
+        });
 
-      // Generate triangles that completely tile the screen with no gaps
-      const triangleHeight = 80;
-      const triangleWidth = triangleHeight * 2; // 2:1 ratio
+        newTriangles.push({
+          id: triangleId++,
+          x: x,
+          y: y,
+          size: triangleWidth + 2, // Slight overlap
+          inverted: true,
+          delay: Math.random() * 0.7,
+        });
 
-      // Extra padding to ensure coverage beyond viewport edges
-      const cols = Math.ceil(window.innerWidth / triangleWidth) + 4;
-      const rows = Math.ceil(window.innerHeight / triangleHeight) + 4;
+        // Offset triangles for complete coverage
+        newTriangles.push({
+          id: triangleId++,
+          x: x + triangleWidth / 2,
+          y: y,
+          size: triangleWidth + 2, // Slight overlap
+          inverted: false,
+          delay: Math.random() * 0.7,
+        });
 
-      const newTriangles: Triangle[] = [];
-      let triangleId = 0;
-
-      // Create overlapping triangles to ensure no gaps
-      for (let row = -2; row < rows; row++) {
-        for (let col = -2; col < cols; col++) {
-          const x = col * triangleWidth;
-          const y = row * triangleHeight;
-
-          // Create both up and down triangles at each position
-          newTriangles.push({
-            id: triangleId++,
-            x: x,
-            y: y,
-            size: triangleWidth,
-            inverted: false,
-            delay: Math.random() * 0.5,
-          });
-
-          newTriangles.push({
-            id: triangleId++,
-            x: x,
-            y: y,
-            size: triangleWidth,
-            inverted: true,
-            delay: Math.random() * 0.5,
-          });
-
-          // Add offset triangles to fill gaps
-          newTriangles.push({
-            id: triangleId++,
-            x: x + triangleWidth / 2,
-            y: y,
-            size: triangleWidth,
-            inverted: false,
-            delay: Math.random() * 0.5,
-          });
-
-          newTriangles.push({
-            id: triangleId++,
-            x: x + triangleWidth / 2,
-            y: y,
-            size: triangleWidth,
-            inverted: true,
-            delay: Math.random() * 0.5,
-          });
-        }
+        newTriangles.push({
+          id: triangleId++,
+          x: x + triangleWidth / 2,
+          y: y,
+          size: triangleWidth + 2, // Slight overlap
+          inverted: true,
+          delay: Math.random() * 0.7,
+        });
       }
+    }
 
-      setTriangles(newTriangles);
-      setShowTriangles(true);
-    }, 300);
+    setTriangles(newTriangles);
+    setShowTriangles(true);
 
-    // Complete animation - super fast
+    // Complete animation
     const timeout = setTimeout(() => {
       onComplete();
-    }, 1500);
+    }, 1200);
 
     return () => clearTimeout(timeout);
   }, [onComplete]);
@@ -138,38 +89,15 @@ export default function TriangleReveal({
     <div className="fixed inset-0 z-[100] pointer-events-none">
       {/* White background overlay */}
       <div
-        className="absolute inset-0 bg-white transition-opacity duration-700"
+        className="absolute inset-0 bg-white z-10"
         style={{
           opacity: showTriangles ? 0 : 1,
         }}
       />
 
-      {/* Lines animation */}
-      {showLines && (
-        <svg className="absolute inset-0 w-full h-full">
-          {lines.map((line) => (
-            <line
-              key={line.id}
-              x1={line.x1}
-              y1={line.y1}
-              x2={line.x2}
-              y2={line.y2}
-              stroke="#000000"
-              strokeWidth="2"
-              className="line-draw"
-              style={{
-                strokeDasharray: "2000",
-                strokeDashoffset: "2000",
-                animation: `drawLine 0.2s ease-out ${line.delay}s forwards`,
-              }}
-            />
-          ))}
-        </svg>
-      )}
-
       {/* Triangle mask overlay - triangles cut through white to show content */}
       {showTriangles && (
-        <svg className="absolute inset-0 w-full h-full">
+        <svg className="absolute inset-0 w-full h-full z-30">
           <defs>
             <mask id="triangleMask">
               <rect width="100%" height="100%" fill="white" />
@@ -209,12 +137,6 @@ export default function TriangleReveal({
       )}
 
       <style>{`
-        @keyframes drawLine {
-          to {
-            strokeDashoffset: 0;
-          }
-        }
-
         @keyframes triangleAppear {
           0% {
             opacity: 0;
