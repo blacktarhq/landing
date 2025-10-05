@@ -87,9 +87,9 @@ export default function TriangleReveal({
 
   return (
     <div className="fixed inset-0 z-[100] pointer-events-none">
-      {/* White background overlay */}
+      {/* Beige background overlay */}
       <div
-        className="absolute inset-0 bg-white z-10"
+        className="absolute inset-0 bg-[#dcd8c0] z-10"
         style={{
           opacity: showTriangles ? 0 : 1,
         }}
@@ -130,7 +130,7 @@ export default function TriangleReveal({
           <rect
             width="100%"
             height="100%"
-            fill="white"
+            fill="#dcd8c0"
             mask="url(#triangleMask)"
           />
         </svg>

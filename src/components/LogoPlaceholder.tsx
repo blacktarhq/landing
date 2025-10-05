@@ -5,9 +5,9 @@ export default function LogoPlaceholder({
 }) {
   return (
     <div
-      className={`flex items-center justify-center bg-zinc-900 border-2 border-zinc-700 ${className}`}
+      className={`flex items-center justify-center bg-[#dcd8c0] border-2 border-[#bab5a1] ${className}`}
     >
-      <div className="text-zinc-500 text-4xl font-bold">LOGO</div>
+      <div className="text-[#454138]/50 text-4xl font-light tracking-[0.5rem]">LOGO</div>
     </div>
   );
 }
