@@ -1,242 +1,35 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, ArrowRight, Mail, Phone, MapPin } from "lucide-react";
-import * as THREE from "three";
-
-// Static SVG Logo Component - Lunar Tear inspired
-function LunarTearLogo({ className = "" }) {
-  return (
-    <svg viewBox="0 0 100 100" className={className} fill="none">
-      {/* Outer petals - bell-shaped arrangement */}
-      <g opacity="0.9">
-        {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
-          <ellipse
-            key={`outer-${i}`}
-            cx="50"
-            cy="50"
-            rx="8"
-            ry="22"
-            fill="#e4e4e7"
-            transform={`rotate(${angle} 50 50)`}
-          />
-        ))}
-      </g>
-
-      {/* Middle layer petals */}
-      <g opacity="0.95">
-        {[22.5, 67.5, 112.5, 157.5, 202.5, 247.5, 292.5, 337.5].map(
-          (angle, i) => (
-            <ellipse
-              key={`middle-${i}`}
-              cx="50"
-              cy="50"
-              rx="7"
-              ry="18"
-              fill="#f4f4f5"
-              transform={`rotate(${angle} 50 50)`}
-            />
-          ),
-        )}
-      </g>
-
-      {/* Inner petals - more upright */}
-      <g>
-        {[0, 60, 120, 180, 240, 300].map((angle, i) => (
-          <ellipse
-            key={`inner-${i}`}
-            cx="50"
-            cy="50"
-            rx="5"
-            ry="14"
-            fill="#fafafa"
-            transform={`rotate(${angle} 50 50)`}
-          />
-        ))}
-      </g>
-
-      {/* Central stigma with detail */}
-      <circle cx="50" cy="50" r="6" fill="#18181b" />
-      <circle cx="50" cy="50" r="4" fill="#27272a" />
-      {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
-        <line
-          key={`stigma-${i}`}
-          x1="50"
-          y1="50"
-          x2={50 + Math.cos((angle * Math.PI) / 180) * 3}
-          y2={50 + Math.sin((angle * Math.PI) / 180) * 3}
-          stroke="#52525b"
-          strokeWidth="0.5"
-        />
-      ))}
-      <circle cx="50" cy="50" r="1.5" fill="#fafafa" />
-    </svg>
-  );
-}
-
-// Three.js Lunar Tear Component - 3D animated version
-function ThreeFlower({ size = 100 }) {
-  const mountRef = useRef(null);
-  const sceneRef = useRef(null);
-  const rendererRef = useRef(null);
-  const animationRef = useRef(null);
-
-  useEffect(() => {
-    if (!mountRef.current) return;
-
-    const scene = new THREE.Scene();
-    sceneRef.current = scene;
-
-    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
-    camera.position.set(0, 2, 6);
-    camera.lookAt(0, 0, 0);
-
-    const renderer = new THREE.WebGLRenderer({
-      alpha: true,
-      antialias: true,
-    });
-    renderer.setSize(size, size);
-    renderer.setClearColor(0x000000, 0);
-    mountRef.current.appendChild(renderer.domElement);
-    rendererRef.current = renderer;
-
-    const group = new THREE.Group();
-
-    // Create bell-shaped petals using LatheGeometry
-    const createPetal = (size, color, rotationOffset = 0) => {
-      const points = [];
-      const segments = 8;
-
-      // Create bell curve profile
-      for (let i = 0; i <= segments; i++) {
-        const t = i / segments;
-        const y = t * size * 2;
-        // Bell curve shape - wider at top, narrower at bottom
-        const x = Math.sin(t * Math.PI) * size * (0.4 + t * 0.6);
-        points.push(new THREE.Vector2(x, y - size));
-      }
-
-      const geometry = new THREE.LatheGeometry(points, 12);
-      const material = new THREE.MeshBasicMaterial({
-        color: color,
-        side: THREE.DoubleSide,
-        transparent: true,
-        opacity: 0.9,
-      });
-
-      const petal = new THREE.Mesh(geometry, material);
-      petal.rotation.x = Math.PI / 3 + rotationOffset; // Tilt petals outward
-      return petal;
-    };
-
-    // Outer ring - 8 petals
-    for (let i = 0; i < 8; i++) {
-      const angle = (i / 8) * Math.PI * 2;
-      const petal = createPetal(0.4, 0xe4e4e7, 0);
-      petal.position.x = Math.cos(angle) * 0.8;
-      petal.position.z = Math.sin(angle) * 0.8;
-      petal.rotation.y = angle;
-      group.add(petal);
-    }
-
-    // Middle ring - 8 petals (offset)
-    for (let i = 0; i < 8; i++) {
-      const angle = (i / 8) * Math.PI * 2 + Math.PI / 8;
-      const petal = createPetal(0.35, 0xf4f4f5, -0.1);
-      petal.position.x = Math.cos(angle) * 0.5;
-      petal.position.z = Math.sin(angle) * 0.5;
-      petal.rotation.y = angle;
-      group.add(petal);
-    }
-
-    // Inner ring - 6 petals
-    for (let i = 0; i < 6; i++) {
-      const angle = (i / 6) * Math.PI * 2;
-      const petal = createPetal(0.3, 0xfafafa, -0.2);
-      petal.position.x = Math.cos(angle) * 0.25;
-      petal.position.z = Math.sin(angle) * 0.25;
-      petal.rotation.y = angle;
-      group.add(petal);
-    }
-
-    // Central stigma
-    const stigmaGeom = new THREE.SphereGeometry(0.15, 16, 16);
-    const stigmaMat = new THREE.MeshBasicMaterial({ color: 0x27272a });
-    const stigma = new THREE.Mesh(stigmaGeom, stigmaMat);
-    stigma.position.y = 0;
-    group.add(stigma);
-
-    // Stigma detail ring
-    const ringGeom = new THREE.TorusGeometry(0.12, 0.02, 8, 16);
-    const ringMat = new THREE.MeshBasicMaterial({ color: 0x52525b });
-    const ring = new THREE.Mesh(ringGeom, ringMat);
-    ring.rotation.x = Math.PI / 2;
-    group.add(ring);
-
-    // Small center highlight
-    const highlightGeom = new THREE.SphereGeometry(0.04, 8, 8);
-    const highlightMat = new THREE.MeshBasicMaterial({ color: 0xfafafa });
-    const highlight = new THREE.Mesh(highlightGeom, highlightMat);
-    highlight.position.y = 0.12;
-    group.add(highlight);
-
-    // Add geometric frame elements inspired by the logo
-    const frameGroup = new THREE.Group();
-
-    // Vertical bars
-    for (let i = 0; i < 4; i++) {
-      const angle = (i / 4) * Math.PI * 2;
-      const barGeom = new THREE.BoxGeometry(0.08, 3, 0.08);
-      const barMat = new THREE.MeshBasicMaterial({
-        color: 0x27272a,
-        transparent: true,
-        opacity: 0.6,
-      });
-      const bar = new THREE.Mesh(barGeom, barMat);
-      bar.position.x = Math.cos(angle) * 2;
-      bar.position.z = Math.sin(angle) * 2;
-      frameGroup.add(bar);
-    }
-
-    scene.add(frameGroup);
-    scene.add(group);
-
-    let time = 0;
-    const animate = () => {
-      animationRef.current = requestAnimationFrame(animate);
-      time += 0.005;
-
-      // Slow rotation
-      group.rotation.y = time * 0.5;
-
-      // Subtle breathing motion
-      group.scale.set(
-        1 + Math.sin(time * 2) * 0.02,
-        1 + Math.sin(time * 2) * 0.02,
-        1 + Math.sin(time * 2) * 0.02,
-      );
-
-      renderer.render(scene, camera);
-    };
-    animate();
-
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-      if (mountRef.current && renderer.domElement) {
-        mountRef.current.removeChild(renderer.domElement);
-      }
-      renderer.dispose();
-    };
-  }, [size]);
-
-  return <div ref={mountRef} className="inline-block" />;
-}
+import LunarTearLogo from "./components/logo/LunarTearLogo";
+import ThreeLunarTear from "./components/logo/ThreeLunarTear";
+import TriangleReveal from "./components/TriangleReveal";
 
 export default function BlackTarLanding() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showReveal, setShowReveal] = useState(true);
+  const [contentVisible, setContentVisible] = useState(true); // Content needs to be visible from start
+
+  // Remove the sessionStorage check - always show animation
+  // useEffect(() => {
+  //   const hasVisited = sessionStorage.getItem("hasVisited");
+  //   if (hasVisited) {
+  //     setShowReveal(false);
+  //     setContentVisible(true);
+  //   } else {
+  //     sessionStorage.setItem("hasVisited", "true");
+  //   }
+  // }, []);
+
+  const handleRevealComplete = () => {
+    setShowReveal(false);
+    setContentVisible(true);
+  };
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 font-mono">
+      {/* Triangle Reveal Animation */}
+      {showReveal && <TriangleReveal onComplete={handleRevealComplete} />}
+
       {/* Navigation with Static Logo */}
       <nav className="fixed w-full bg-zinc-950/95 backdrop-blur-sm z-50 border-b border-zinc-800">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -293,10 +86,10 @@ export default function BlackTarLanding() {
       </nav>
 
       {/* Hero Section with 3D Logo */}
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
+      <section className="relative pt-32 pb-20 px-6 min-h-screen">
+        <div className="max-w-7xl mx-auto h-full">
+          <div className="grid md:grid-cols-2 gap-12 items-center h-full">
+            <div className="z-10">
               <div className="inline-block px-3 py-1 bg-zinc-900 border border-zinc-800 text-xs tracking-wider mb-6">
                 PRECISION • INNOVATION • RELIABILITY
               </div>
@@ -319,18 +112,8 @@ export default function BlackTarLanding() {
               </button>
             </div>
 
-            <div className="relative flex items-center justify-center">
-              <div className="aspect-square w-full max-w-md bg-zinc-900 border-4 border-zinc-800 flex items-center justify-center relative overflow-hidden">
-                <ThreeFlower size={400} />
-                <div
-                  className="absolute inset-0 border border-zinc-700 pointer-events-none"
-                  style={{ margin: "15%" }}
-                ></div>
-                <div
-                  className="absolute inset-0 border border-zinc-800 pointer-events-none"
-                  style={{ margin: "8%" }}
-                ></div>
-              </div>
+            <div className="relative w-full h-[600px] md:h-[800px] -mr-12 md:-mr-24">
+              <ThreeLunarTear className="w-full h-full" />
             </div>
           </div>
         </div>
