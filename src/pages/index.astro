@@ -11,14 +11,14 @@ const currentYear = new Date().getFullYear();
     <header
       class="border-b-2 border-black pt-4 md:pt-8 px-4 md:px-8 pb-4 md:pb-6 flex justify-between items-center relative"
     >
-      <div class="flex items-center gap-4">
+      <a href="/" class="flex items-center gap-4 hover:opacity-70 transition-opacity">
         <img src="/logo.svg" alt="BlackTar" class="h-12 md:h-16 w-auto" />
         <div class="text-sm md:text-base font-bold leading-tight">
           BLACKTAR<br />
           ENGINEERING<br />
           WORKS
         </div>
-      </div>
+      </a>
 
       <!-- Desktop Navigation -->
       <nav
@@ -572,8 +572,8 @@ const currentYear = new Date().getFullYear();
             © {currentYear} BLACKTAR ENGINEERING WORKS. ALL RIGHTS RESERVED.
           </div>
           <div class="flex gap-4 opacity-70">
-            <div class="border-l-2 border-black pl-2">PRIVACY POLICY</div>
-            <div class="border-l-2 border-black pl-2">TERMS OF SERVICE</div>
+            <a href="/privacy" class="border-l-2 border-black pl-2 hover:opacity-100 transition-opacity">PRIVACY POLICY</a>
+            <a href="/terms" class="border-l-2 border-black pl-2 hover:opacity-100 transition-opacity">TERMS OF SERVICE</a>
           </div>
         </div>
       </div>
