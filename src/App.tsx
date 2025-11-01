@@ -1,21 +1,11 @@
-import { useState } from "react";
 import { Star, Github, Linkedin } from "lucide-react";
-import TriangleReveal from "./components/TriangleReveal";
 import logo from "./logo.svg";
 
 export default function BlackTarLanding() {
-  const [showReveal, setShowReveal] = useState(true);
   const currentYear = new Date().getFullYear();
-
-  const handleRevealComplete = () => {
-    setShowReveal(false);
-  };
 
   return (
     <div className="min-h-screen">
-      {/* Triangle Reveal Animation */}
-      {showReveal && <TriangleReveal onComplete={handleRevealComplete} />}
-
       {/* Header */}
       <header className="border-b-2 border-black pt-4 md:pt-8 px-4 md:px-8 pb-4 md:pb-6 flex justify-between items-start">
         <div className="flex items-center gap-4">
@@ -58,7 +48,7 @@ export default function BlackTarLanding() {
       </section>
 
       {/* Black Section with Project List */}
-      <section className="bg-black text-[#d21e1e] border-t-4 border-black relative">
+      <section className="bg-black text-white border-t-4 border-black relative">
         {/* Vertical text on right */}
         <div className="hidden md:block absolute right-4 top-1/4 z-10">
           <div className="text-sm font-bold tracking-wider" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
@@ -120,7 +110,7 @@ export default function BlackTarLanding() {
                   number: "05",
                 },
               ].map((project, i) => (
-                <div key={i} className="border-b-2 border-[#d21e1e] pb-6 border-l-4 border-[#d21e1e] pl-4">
+                <div key={i} className="border-b-2 border-white pb-6 border-l-4 border-white pl-4">
                   <div className="flex items-start gap-4 mb-2">
                     <div className="text-3xl font-bold opacity-50">
                       {project.number}
@@ -139,7 +129,7 @@ export default function BlackTarLanding() {
                           {project.year}
                         </div>
                       </div>
-                      <div className="text-sm mb-2 opacity-80 border-b border-[#d21e1e] inline-block pb-1">
+                      <div className="text-sm mb-2 opacity-80 border-b border-white inline-block pb-1">
                         {project.client}
                       </div>
                       <p className="text-sm leading-relaxed mb-2 opacity-90">
@@ -154,8 +144,8 @@ export default function BlackTarLanding() {
               ))}
             </div>
 
-            <div className="mt-12 pt-8 border-t-2 border-[#d21e1e]">
-              <p className="text-sm leading-relaxed opacity-90 border-l-4 border-[#d21e1e] pl-4">
+            <div className="mt-12 pt-8 border-t-2 border-white">
+              <p className="text-sm leading-relaxed opacity-90 border-l-4 border-white pl-4">
                 FROM ZERO TO ONE OR ONE TO MILLION. WE BUILD SYSTEMS THAT SCALE, CODE THAT LASTS, AND INFRASTRUCTURE THAT DOESN'T BREAK AT 3AM. LET'S SHIP SOMETHING THAT MATTERS.
               </p>
             </div>
@@ -251,7 +241,7 @@ export default function BlackTarLanding() {
       </section>
 
       {/* Philosophy Section - Black Background */}
-      <section className="p-8 md:p-16 border-t-4 border-black bg-black text-[#d21e1e] relative">
+      <section className="p-8 md:p-16 border-t-4 border-black bg-black text-white relative">
         {/* Vertical text */}
         <div className="hidden md:block absolute right-4 top-1/2 -translate-y-1/2 z-10">
           <div className="text-sm font-bold tracking-wider" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
@@ -260,13 +250,13 @@ export default function BlackTarLanding() {
         </div>
 
         <div className="max-w-5xl mx-auto">
-          <p className="text-3xl md:text-5xl font-bold leading-tight mb-8 border-l-8 border-[#d21e1e] pl-6">
+          <p className="text-3xl md:text-5xl font-bold leading-tight mb-8 border-l-8 border-white pl-6">
             WE BUILD SOFTWARE THAT WORKS FOR PEOPLE, NOT THE OTHER WAY AROUND
           </p>
 
           <div className="grid md:grid-cols-2 gap-8 mt-12">
-            <div className="border-l-4 border-[#d21e1e] pl-6">
-              <h3 className="text-xl md:text-2xl font-bold mb-4 border-b-2 border-[#d21e1e] pb-2">
+            <div className="border-l-4 border-white pl-6">
+              <h3 className="text-xl md:text-2xl font-bold mb-4 border-b-2 border-white pb-2">
                 OUR PROCESS
               </h3>
               <p className="text-sm md:text-base leading-relaxed mb-4">
@@ -280,8 +270,8 @@ export default function BlackTarLanding() {
               </p>
             </div>
 
-            <div className="border-l-4 border-[#d21e1e] pl-6">
-              <h3 className="text-xl md:text-2xl font-bold mb-4 border-b-2 border-[#d21e1e] pb-2">
+            <div className="border-l-4 border-white pl-6">
+              <h3 className="text-xl md:text-2xl font-bold mb-4 border-b-2 border-white pb-2">
                 WHY WORK WITH US
               </h3>
               <p className="text-sm md:text-base leading-relaxed mb-4">
@@ -296,8 +286,8 @@ export default function BlackTarLanding() {
             </div>
           </div>
 
-          <div className="mt-12 pt-8 border-t-4 border-[#d21e1e] border-l-4 border-[#d21e1e] pl-6">
-            <h3 className="text-xl md:text-2xl font-bold mb-4 border-b-2 border-[#d21e1e] pb-2">
+          <div className="mt-12 pt-8 border-t-4 border-white border-l-4 border-white pl-6">
+            <h3 className="text-xl md:text-2xl font-bold mb-4 border-b-2 border-white pb-2">
               CLIENTS
             </h3>
             <p className="text-sm md:text-base leading-relaxed">
