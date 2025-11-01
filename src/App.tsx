@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Star } from "lucide-react";
+import { Star, Github, Linkedin } from "lucide-react";
 import TriangleReveal from "./components/TriangleReveal";
+import logo from "./logo.svg";
 
 export default function BlackTarLanding() {
   const [showReveal, setShowReveal] = useState(true);
@@ -17,10 +18,13 @@ export default function BlackTarLanding() {
 
       {/* Header */}
       <header className="border-b-2 border-black pt-4 md:pt-8 px-4 md:px-8 pb-4 md:pb-6 flex justify-between items-start">
-        <div className="text-sm md:text-base font-bold leading-tight">
-          BLACKTAR<br />
-          ENGINEERING<br />
-          WORKS
+        <div className="flex items-center gap-4">
+          <img src={logo} alt="BlackTar" className="h-12 md:h-16 w-auto" />
+          <div className="text-sm md:text-base font-bold leading-tight">
+            BLACKTAR<br />
+            ENGINEERING<br />
+            WORKS
+          </div>
         </div>
         <nav className="text-sm md:text-base font-bold text-right flex gap-8">
           <div className="border-l-2 border-black pl-4">WORK</div>
@@ -319,7 +323,9 @@ export default function BlackTarLanding() {
             <div className="border-l-4 border-black pl-4">
               <div className="font-bold mb-2 text-sm border-b-2 border-black pb-1 inline-block">CONTACT</div>
               <div className="text-sm leading-relaxed">
-                <div>HELLO@BLACKTARENGINEERING.COM</div>
+                <div>
+                  INFO<span className="opacity-50">[at]</span>BLACKTAR<span className="opacity-50">[dot]</span>WORKS
+                </div>
                 <div className="opacity-70 mt-2">
                   For project inquiries, partnerships, or general questions.
                 </div>
@@ -338,10 +344,29 @@ export default function BlackTarLanding() {
 
             <div className="border-l-4 border-black pl-4">
               <div className="font-bold mb-2 text-sm border-b-2 border-black pb-1 inline-block">CONNECT</div>
-              <div className="text-sm leading-relaxed">
-                <div>GITHUB.COM/BLACKTARENGINEERING</div>
-                <div>TWITTER.COM/BLACKTARENGINEERING</div>
-                <div>LINKEDIN.COM/COMPANY/BLACKTAR-ENGINEERING-WORKS</div>
+              <div className="text-sm leading-relaxed space-y-2">
+                <a href="https://github.com/blacktarhq" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-70 transition-opacity">
+                  <Github size={20} />
+                  <span>GITHUB.COM/BLACKTARHQ</span>
+                </a>
+                <a href="https://x.com/blacktarhq" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-70 transition-opacity">
+                  <svg
+                    className="inline-block"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+                  </svg>
+                  <span>X.COM/BLACKTARHQ</span>
+                </a>
+                <a href="https://linkedin.com/company/blacktarhq" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-70 transition-opacity">
+                  <Linkedin size={20} />
+                  <span>LINKEDIN.COM/COMPANY/BLACKTARHQ</span>
+                </a>
               </div>
             </div>
           </div>
