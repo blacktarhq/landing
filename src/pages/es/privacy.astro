@@ -1,0 +1,112 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const currentYear = new Date().getFullYear();
+---
+
+<BaseLayout title="Privacy Policy - BLACKTAR ENGINEERING WORKS">
+  <div class="min-h-screen">
+    <!-- Header -->
+    <header class="border-b-2 border-black p-4 md:p-8">
+      <a href="/" class="inline-block hover:opacity-70 transition-opacity">
+        <div class="flex items-center gap-4">
+          <img src="/logo.svg" alt="BlackTar" class="h-12 md:h-16 w-auto" />
+          <div class="text-sm md:text-base font-bold leading-tight">
+            BLACKTAR<br />
+            ENGINEERING<br />
+            WORKS
+          </div>
+        </div>
+      </a>
+    </header>
+
+    <!-- Content -->
+    <main class="max-w-4xl mx-auto p-8 md:p-16">
+      <h1 class="text-4xl md:text-6xl font-bold mb-8 border-l-8 border-black pl-6">
+        PRIVACY POLICY
+      </h1>
+
+      <div class="space-y-8 border-l-4 border-black pl-6">
+        <section>
+          <p class="text-sm opacity-70 mb-4">Last Updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+          <p class="leading-relaxed">
+            At BLACKTAR ENGINEERING WORKS, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold mb-4 border-b-2 border-black pb-2">INFORMATION WE COLLECT</h2>
+          <p class="leading-relaxed mb-4">
+            We may collect information about you in a variety of ways. The information we may collect on the website includes:
+          </p>
+          <ul class="space-y-2 list-disc list-inside">
+            <li>Personal Data: Name, email address, and contact information you provide when reaching out to us</li>
+            <li>Usage Data: Information about how you access and use our website</li>
+            <li>Cookies and Tracking Technologies: We may use cookies and similar tracking technologies to track activity on our website</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold mb-4 border-b-2 border-black pb-2">HOW WE USE YOUR INFORMATION</h2>
+          <p class="leading-relaxed mb-4">
+            We use the information we collect to:
+          </p>
+          <ul class="space-y-2 list-disc list-inside">
+            <li>Respond to your inquiries and provide customer support</li>
+            <li>Improve our website and services</li>
+            <li>Send you marketing and promotional communications (with your consent)</li>
+            <li>Monitor and analyze usage and trends to improve your experience</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold mb-4 border-b-2 border-black pb-2">DISCLOSURE OF YOUR INFORMATION</h2>
+          <p class="leading-relaxed">
+            We do not sell, trade, or rent your personal information to third parties. We may share information with trusted third parties who assist us in operating our website, conducting our business, or servicing you, as long as those parties agree to keep this information confidential.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold mb-4 border-b-2 border-black pb-2">DATA SECURITY</h2>
+          <p class="leading-relaxed">
+            We use administrative, technical, and physical security measures to protect your personal information. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee absolute security.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold mb-4 border-b-2 border-black pb-2">YOUR RIGHTS</h2>
+          <p class="leading-relaxed mb-4">
+            Depending on your location, you may have certain rights regarding your personal information, including:
+          </p>
+          <ul class="space-y-2 list-disc list-inside">
+            <li>The right to access the personal information we hold about you</li>
+            <li>The right to request correction of inaccurate information</li>
+            <li>The right to request deletion of your personal information</li>
+            <li>The right to object to or restrict processing of your information</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold mb-4 border-b-2 border-black pb-2">CONTACT US</h2>
+          <p class="leading-relaxed">
+            If you have questions or concerns about this Privacy Policy, please contact us at:<br />
+            <strong>INFO[at]BLACKTAR[dot]WORKS</strong>
+          </p>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t-2 border-black p-8 md:p-16 mt-16">
+      <div class="max-w-6xl mx-auto text-center">
+        <p class="text-sm opacity-70">
+          © {currentYear} BLACKTAR ENGINEERING WORKS. ALL RIGHTS RESERVED.
+        </p>
+        <div class="mt-4 flex gap-4 justify-center text-xs">
+          <a href="/privacy" class="hover:opacity-70 transition-opacity">PRIVACY POLICY</a>
+          <a href="/terms" class="hover:opacity-70 transition-opacity">TERMS OF SERVICE</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</BaseLayout>

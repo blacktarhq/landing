@@ -1,0 +1,164 @@
+---
+import { Star, Github } from "@lucide/astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const currentYear = new Date().getFullYear();
+---
+
+<BaseLayout title="Open Source - BLACKTAR ENGINEERING WORKS">
+  <div class="min-h-screen">
+    <!-- Header -->
+    <header class="border-b-2 border-black p-4 md:p-8">
+      <a href="/" class="inline-block hover:opacity-70 transition-opacity">
+        <div class="flex items-center gap-4">
+          <img src="/logo.svg" alt="BlackTar" class="h-12 md:h-16 w-auto" />
+          <div class="text-sm md:text-base font-bold leading-tight">
+            BLACKTAR<br />
+            ENGINEERING<br />
+            WORKS
+          </div>
+        </div>
+      </a>
+    </header>
+
+    <!-- Hero -->
+    <section class="border-b-4 border-black p-8 md:p-16">
+      <div class="max-w-6xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 border-l-8 border-black pl-6">
+          OPEN SOURCE CONTRIBUTIONS
+        </h1>
+        <p class="text-lg md:text-xl leading-relaxed border-l-4 border-black pl-6">
+          GOOD SOFTWARE SHOULD BE FREE. GREAT SOFTWARE SHOULD BE OPEN. WE BUILD TOOLS WE WISH EXISTED, THEN SHARE THEM WITH THE WORLD.
+        </p>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="p-8 md:p-16">
+      <div class="max-w-6xl mx-auto space-y-12">
+        {
+          [
+            {
+              name: "CLI TOOLKIT",
+              repo: "GITHUB.COM/BLACKTARENGINEERING/CLI-TOOLKIT",
+              desc: "Stop fighting with argument parsers. Beautiful CLIs in minutes, not days. Colorized output, progress bars, interactive prompts. TypeScript-native and battle-tested by thousands.",
+              tech: "TYPESCRIPT / NODE.JS",
+              stars: "2.5K",
+              features: [
+                "Intuitive API for building command-line applications",
+                "Built-in support for colorized output and formatting",
+                "Interactive prompts with validation",
+                "Progress bars and spinners",
+                "Automatic help generation"
+              ]
+            },
+            {
+              name: "RUST WEB FRAMEWORK",
+              repo: "GITHUB.COM/BLACKTARENGINEERING/RUST-WEB",
+              desc: "Web framework that doesn't make you choose between speed and developer experience. Async by default. Zero-cost abstractions. Routing and middleware that just works.",
+              tech: "RUST / TOKIO",
+              stars: "1.8K",
+              features: [
+                "Blazing fast performance with zero-cost abstractions",
+                "Type-safe routing and middleware",
+                "Async/await support out of the box",
+                "Built-in request validation",
+                "Comprehensive testing utilities"
+              ]
+            },
+            {
+              name: "DATABASE MIGRATION TOOL",
+              repo: "GITHUB.COM/BLACKTARENGINEERING/MIGRATE",
+              desc: "Git for your database schema. One tool, multiple databases. Rollback with confidence. Team-ready from day one. PostgreSQL, MySQL, MongoDB support built-in.",
+              tech: "GO / SQL",
+              stars: "3.2K",
+              features: [
+                "Version control for database schemas",
+                "Support for PostgreSQL, MySQL, and MongoDB",
+                "Safe rollback functionality",
+                "Team collaboration features",
+                "CLI and programmatic API"
+              ]
+            }
+          ].map((project) => (
+            <article class="border-l-4 border-black pl-8 pb-8 border-b-2 border-black">
+              <div class="flex justify-between items-start mb-4">
+                <h2 class="text-2xl md:text-3xl font-bold">{project.name}</h2>
+                <div class="flex items-center gap-2 text-sm">
+                  <Star size={16} fill="currentColor" />
+                  {project.stars}
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <a
+                  href={`https://${project.repo.toLowerCase()}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-sm opacity-80 hover:opacity-100 transition-opacity inline-flex items-center gap-2 border-b border-black"
+                >
+                  <Github size={16} />
+                  {project.repo}
+                </a>
+              </div>
+
+              <p class="text-base leading-relaxed mb-6 opacity-90">
+                {project.desc}
+              </p>
+
+              <div class="mb-6">
+                <h3 class="text-sm font-bold mb-2 opacity-70">KEY FEATURES:</h3>
+                <ul class="space-y-1 text-sm">
+                  {project.features.map((feature) => (
+                    <li class="flex gap-2">
+                      <span class="opacity-50">•</span>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div class="text-xs opacity-70 font-bold">
+                {project.tech}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="bg-black text-white p-8 md:p-16 border-t-4 border-black">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+          ACTIVELY MAINTAINED. WELL-DOCUMENTED. CONTRIBUTIONS WELCOME.
+        </h2>
+        <p class="text-lg mb-8 opacity-90">
+          Check out our repositories on GitHub and join the community.
+        </p>
+        <a
+          href="https://github.com/blacktarhq"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 bg-white text-black px-8 py-4 font-bold hover:opacity-90 transition-opacity"
+        >
+          <Github size={24} />
+          VISIT OUR GITHUB
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t-2 border-black p-8 md:p-16">
+      <div class="max-w-6xl mx-auto text-center">
+        <p class="text-sm opacity-70">
+          © {currentYear} BLACKTAR ENGINEERING WORKS. ALL RIGHTS RESERVED.
+        </p>
+        <div class="mt-4 flex gap-4 justify-center text-xs">
+          <a href="/privacy" class="hover:opacity-70 transition-opacity">PRIVACY POLICY</a>
+          <a href="/terms" class="hover:opacity-70 transition-opacity">TERMS OF SERVICE</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</BaseLayout>
