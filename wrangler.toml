@@ -1,0 +1,5 @@
+name = "blacktar-landing"
+compatibility_date = "2025-10-31"
+
+[assets]
+directory = "./dist"
