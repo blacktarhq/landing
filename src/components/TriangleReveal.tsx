@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 
-interface Triangle {
+interface Block {
   id: number;
   x: number;
   y: number;
-  size: number;
-  inverted: boolean;
+  width: number;
+  height: number;
   delay: number;
+  color: string;
 }
 
 export default function TriangleReveal({
@@ -14,112 +15,78 @@ export default function TriangleReveal({
 }: {
   onComplete: () => void;
 }) {
-  const [triangles, setTriangles] = useState<Triangle[]>([]);
-  const [showTriangles, setShowTriangles] = useState(false);
+  const [blocks, setBlocks] = useState<Block[]>([]);
+  const [showBlocks, setShowBlocks] = useState(false);
 
   useEffect(() => {
-    // Generate triangles immediately
-    const triangleWidth = 200; // Set to 200px wide
-    const triangleHeight = 100; // 2:1 ratio - wider than tall
+    // Generate larger, brutalist geometric blocks
+    const blockWidth = 200;
+    const blockHeight = 200;
 
-    const cols = Math.ceil(window.innerWidth / triangleWidth) + 4;
-    const rows = Math.ceil(window.innerHeight / triangleHeight) + 4;
+    const cols = Math.ceil(window.innerWidth / blockWidth) + 2;
+    const rows = Math.ceil(window.innerHeight / blockHeight) + 2;
 
-    const newTriangles: Triangle[] = [];
-    let triangleId = 0;
+    const colors = ["#000", "#d21e1e"]; // Only red and black
+    const newBlocks: Block[] = [];
+    let blockId = 0;
 
-    // Create overlapping grid to eliminate all gaps
-    for (let row = -2; row < rows; row++) {
-      for (let col = -2; col < cols; col++) {
-        const x = col * triangleWidth;
-        const y = row * triangleHeight;
+    for (let row = -1; row < rows; row++) {
+      for (let col = -1; col < cols; col++) {
+        const x = col * blockWidth;
+        const y = row * blockHeight;
 
-        // Base triangles
-        newTriangles.push({
-          id: triangleId++,
-          x: x,
-          y: y,
-          size: triangleWidth + 2, // Slight overlap
-          inverted: false,
-          delay: Math.random() * 0.7,
-        });
-
-        newTriangles.push({
-          id: triangleId++,
-          x: x,
-          y: y,
-          size: triangleWidth + 2, // Slight overlap
-          inverted: true,
-          delay: Math.random() * 0.7,
-        });
-
-        // Offset triangles for complete coverage
-        newTriangles.push({
-          id: triangleId++,
-          x: x + triangleWidth / 2,
-          y: y,
-          size: triangleWidth + 2, // Slight overlap
-          inverted: false,
-          delay: Math.random() * 0.7,
-        });
-
-        newTriangles.push({
-          id: triangleId++,
-          x: x + triangleWidth / 2,
-          y: y,
-          size: triangleWidth + 2, // Slight overlap
-          inverted: true,
-          delay: Math.random() * 0.7,
+        newBlocks.push({
+          id: blockId++,
+          x,
+          y,
+          width: blockWidth + 5,
+          height: blockHeight + 5,
+          delay: Math.random() * 0.4, // Faster, more abrupt
+          color: colors[Math.floor(Math.random() * colors.length)],
         });
       }
     }
 
-    setTriangles(newTriangles);
-    setShowTriangles(true);
+    setBlocks(newBlocks);
+    setShowBlocks(true);
 
-    // Complete animation
+    // Shorter animation duration for brutalist feel
     const timeout = setTimeout(() => {
       onComplete();
-    }, 1200);
+    }, 700);
 
     return () => clearTimeout(timeout);
   }, [onComplete]);
 
   return (
     <div className="fixed inset-0 z-[100] pointer-events-none">
-      {/* Beige background overlay */}
+      {/* Black background */}
       <div
-        className="absolute inset-0 bg-[#dcd8c0] z-10"
+        className="absolute inset-0 bg-black z-10"
         style={{
-          opacity: showTriangles ? 0 : 1,
+          opacity: showBlocks ? 0 : 1,
         }}
       />
 
-      {/* Triangle mask overlay - triangles cut through white to show content */}
-      {showTriangles && (
+      {/* Brutalist block pattern - harsh geometric reveal */}
+      {showBlocks && (
         <svg className="absolute inset-0 w-full h-full z-30">
           <defs>
-            <mask id="triangleMask">
+            <mask id="blockMask">
               <rect width="100%" height="100%" fill="white" />
-              {triangles.map((triangle) => {
-                const { x, y, size, inverted, delay, id } = triangle;
-
-                // Create wider triangles (width is 'size', height is size/2)
-                const height = size / 2;
-
-                // Up triangle: point at top, base at bottom
-                // Down triangle: base at top, point at bottom
-                const points = inverted
-                  ? `${x},${y} ${x + size},${y} ${x + size / 2},${y + height}` // Point down
-                  : `${x},${y + height} ${x + size},${y + height} ${x + size / 2},${y}`; // Point up
+              {blocks.map((block) => {
+                const { x, y, width, height, delay, id } = block;
 
                 return (
-                  <polygon
+                  <rect
                     key={id}
-                    points={points}
+                    x={x}
+                    y={y}
+                    width={width}
+                    height={height}
                     fill="black"
                     style={{
-                      animation: `triangleAppear 0.05s step-end ${delay}s forwards`,
+                      animation: `blockAppear 0.01s step-end ${delay}s forwards`,
                       opacity: 0,
                     }}
                   />
@@ -130,18 +97,45 @@ export default function TriangleReveal({
           <rect
             width="100%"
             height="100%"
-            fill="#dcd8c0"
-            mask="url(#triangleMask)"
+            fill="#000"
+            mask="url(#blockMask)"
           />
         </svg>
       )}
 
+      {/* Red/Black blocks that flash */}
+      {showBlocks && blocks.slice(0, 15).map((block) => (
+        <div
+          key={`color-${block.id}`}
+          className="absolute"
+          style={{
+            left: block.x,
+            top: block.y,
+            width: block.width,
+            height: block.height,
+            backgroundColor: block.color,
+            opacity: 0,
+            animation: `colorFlash 0.08s ease-in ${block.delay}s`,
+            border: '1px solid #000',
+          }}
+        />
+      ))}
+
       <style>{`
-        @keyframes triangleAppear {
+        @keyframes blockAppear {
           0% {
             opacity: 0;
           }
           100% {
+            opacity: 1;
+          }
+        }
+
+        @keyframes colorFlash {
+          0%, 100% {
+            opacity: 0;
+          }
+          50% {
             opacity: 1;
           }
         }
