@@ -1,5 +1,5 @@
 ---
-import { Star, Github, Linkedin } from "@lucide/astro";
+import { Star, Github, Linkedin, X, Menu } from "@lucide/astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const currentYear = new Date().getFullYear();
@@ -9,7 +9,7 @@ const currentYear = new Date().getFullYear();
   <div class="min-h-screen">
     <!-- Header -->
     <header
-      class="border-b-2 border-black pt-4 md:pt-8 px-4 md:px-8 pb-4 md:pb-6 flex justify-between items-start"
+      class="border-b-2 border-black pt-4 md:pt-8 px-4 md:px-8 pb-4 md:pb-6 flex justify-between items-center relative"
     >
       <div class="flex items-center gap-4">
         <img src="/logo.svg" alt="BlackTar" class="h-12 md:h-16 w-auto" />
@@ -19,32 +19,129 @@ const currentYear = new Date().getFullYear();
           WORKS
         </div>
       </div>
-      <nav class="text-sm md:text-base font-bold text-right flex gap-8">
-        <div class="border-l-2 border-black pl-4">WORK</div>
-        <div class="border-l-2 border-black pl-4">ABOUT</div>
-        <div class="border-l-2 border-black pl-4">CONTACT</div>
+
+      <!-- Desktop Navigation -->
+      <nav
+        class="hidden md:flex text-sm md:text-base font-bold text-right gap-8 items-center"
+      >
+        <a
+          href="#work"
+          class="border-l-2 border-black pl-4 hover:opacity-70 transition-opacity"
+          >WORK</a
+        >
+        <a
+          href="#about"
+          class="border-l-2 border-black pl-4 hover:opacity-70 transition-opacity"
+          >ABOUT</a
+        >
+        <a
+          href="#contact"
+          class="border-l-2 border-black pl-4 hover:opacity-70 transition-opacity"
+          >CONTACT</a
+        >
       </nav>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-button"
+        class="md:hidden p-2 hover:opacity-70 transition-opacity"
+        aria-label="Toggle menu"
+      >
+        <Menu size={32} stroke="black" strokeWidth={2} />
+      </button>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div
+      id="mobile-menu"
+      class="fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out md:hidden"
+    >
+      <div class="flex flex-col h-full">
+        <!-- Mobile Menu Header -->
+        <div
+          class="border-b-2 border-black p-4 flex justify-between items-center"
+        >
+          <div class="text-sm font-bold leading-tight">MENU</div>
+          <button id="mobile-menu-close" class="p-2" aria-label="Close menu">
+            <X size={24} />
+          </button>
+        </div>
+
+        <!-- Mobile Navigation Links -->
+        <nav class="flex flex-col p-8 gap-8 text-2xl font-bold">
+          <a
+            href="#work"
+            class="border-l-4 border-black pl-4 py-2 hover:bg-black hover:text-white transition-colors mobile-menu-link"
+            >WORK</a
+          >
+          <a
+            href="#about"
+            class="border-l-4 border-black pl-4 py-2 hover:bg-black hover:text-white transition-colors mobile-menu-link"
+            >ABOUT</a
+          >
+          <a
+            href="#contact"
+            class="border-l-4 border-black pl-4 py-2 hover:bg-black hover:text-white transition-colors mobile-menu-link"
+            >CONTACT</a
+          >
+        </nav>
+      </div>
+    </div>
+
+    <script>
+      // Mobile menu functionality
+      const mobileMenuButton = document.getElementById("mobile-menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const mobileMenuClose = document.getElementById("mobile-menu-close");
+      const mobileMenuLinks = document.querySelectorAll(".mobile-menu-link");
+      const menuIcon = document.getElementById("menu-icon");
+      const closeIcon = document.getElementById("close-icon");
+
+      function openMenu() {
+        mobileMenu?.classList.remove("translate-x-full");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeMenu() {
+        mobileMenu?.classList.add("translate-x-full");
+        document.body.style.overflow = "";
+      }
+
+      mobileMenuButton?.addEventListener("click", openMenu);
+      mobileMenuClose?.addEventListener("click", closeMenu);
+
+      // Close menu when clicking a link
+      mobileMenuLinks.forEach((link) => {
+        link.addEventListener("click", closeMenu);
+      });
+
+      // Close menu on escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeMenu();
+        }
+      });
+    </script>
 
     <!-- Giant Hero Typography -->
     <section
-      class="min-h-screen flex items-end justify-start p-4 md:p-8 pb-20 md:pb-32 relative"
+      class="min-h-[60vh] md:min-h-screen flex items-end justify-start p-4 md:p-8 pb-8 md:pb-32 relative"
     >
       <!-- Vertical text on left -->
       <div
-        class="hidden md:block absolute left-4 top-1/2 -translate-y-1/2 z-10"
+        class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10"
       >
         <div
-          class="text-sm font-bold tracking-wider"
+          class="text-xs md:text-sm font-bold tracking-wider"
           style="writing-mode: vertical-rl; text-orientation: mixed;"
         >
           EST. {currentYear}
         </div>
       </div>
 
-      <div class="w-full md:pl-8">
-        <div class="mb-8 max-w-4xl border-l-4 border-black pl-6">
-          <p class="text-base md:text-lg leading-relaxed mb-4">
+      <div class="w-full pl-6 pr-6 md:pl-8 md:pr-0">
+        <div class="mb-4 md:mb-8 max-w-4xl border-l-4 border-black pl-4 md:pl-6">
+          <p class="text-sm md:text-lg leading-relaxed mb-2 md:mb-4">
             WE BUILD SOFTWARE THAT MOVES FAST, SCALES HARD, AND DELIVERS
             RESULTS. FROM EARLY-STAGE DISRUPTORS TO ESTABLISHED CATEGORY
             LEADERS, WE ENGINEER SYSTEMS THAT PERFORM UNDER PRESSURE.
@@ -64,19 +161,29 @@ const currentYear = new Date().getFullYear();
     </section>
 
     <!-- Black Section with Project List -->
-    <section class="bg-black text-white border-t-4 border-black relative">
+    <section
+      id="work"
+      class="bg-black text-white border-t-4 border-black relative"
+    >
       <!-- Vertical text on right -->
-      <div class="hidden md:block absolute right-4 top-0 bottom-0 z-10 overflow-hidden w-8">
+      <div
+        class="absolute right-2 md:right-4 top-0 bottom-0 z-10 overflow-hidden w-6 md:w-8"
+      >
         <div
-          class="text-base font-bold tracking-wider animate-scroll-vertical whitespace-nowrap"
+          class="text-xs md:text-base font-bold tracking-wider animate-scroll-vertical whitespace-nowrap"
           style="writing-mode: vertical-rl; text-orientation: mixed;"
         >
-          SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS •
+          SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED
+          PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS •
+          SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED
+          PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS •
+          SELECTED PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS • SELECTED
+          PROJECTS • SELECTED PROJECTS • SELECTED PROJECTS •
         </div>
       </div>
 
       <!-- Projects List -->
-      <div class="p-8 md:p-16 max-w-7xl mx-auto">
+      <div class="p-8 pr-10 md:p-16 max-w-7xl mx-auto">
         <h2 class="text-3xl md:text-5xl font-bold mb-12 leading-tight">
           SELECTED WORK
         </h2>
@@ -177,18 +284,22 @@ const currentYear = new Date().getFullYear();
     <section class="border-t-4 border-black relative">
       <!-- Vertical text -->
       <div
-        class="hidden md:block absolute left-4 top-0 bottom-0 z-10 overflow-hidden w-8"
+        class="absolute left-2 md:left-4 top-0 bottom-0 z-10 overflow-hidden w-6 md:w-8"
       >
         <div
-          class="text-base font-bold tracking-wider animate-scroll-vertical whitespace-nowrap"
+          class="text-xs md:text-base font-bold tracking-wider animate-scroll-vertical whitespace-nowrap"
           style="writing-mode: vertical-rl; text-orientation: mixed;"
         >
-          OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE •
+          OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE •
+          OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE •
+          OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE •
+          OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE •
+          OPEN SOURCE • OPEN SOURCE • OPEN SOURCE • OPEN SOURCE •
         </div>
       </div>
 
       <!-- Projects List -->
-      <div class="p-8 md:p-16 max-w-7xl mx-auto">
+      <div class="p-8 pl-10 md:p-16 max-w-7xl mx-auto">
         <h2 class="text-3xl md:text-5xl font-bold mb-12 leading-tight">
           OPEN SOURCE CONTRIBUTIONS
         </h2>
@@ -272,21 +383,26 @@ const currentYear = new Date().getFullYear();
 
     <!-- Philosophy Section - Black Background -->
     <section
+      id="about"
       class="p-8 md:p-16 border-t-4 border-black bg-black text-white relative"
     >
       <!-- Vertical text -->
       <div
-        class="hidden md:block absolute right-4 top-0 bottom-0 z-10 overflow-hidden w-8"
+        class="absolute right-2 md:right-4 top-0 bottom-0 z-10 overflow-hidden w-6 md:w-8"
       >
         <div
-          class="text-base font-bold tracking-wider animate-scroll-vertical whitespace-nowrap"
+          class="text-xs md:text-base font-bold tracking-wider animate-scroll-vertical whitespace-nowrap"
           style="writing-mode: vertical-rl; text-orientation: mixed;"
         >
-          PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY •
+          PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY •
+          PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY •
+          PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY •
+          PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY •
+          PHILOSOPHY • PHILOSOPHY • PHILOSOPHY • PHILOSOPHY •
         </div>
       </div>
 
-      <div class="max-w-5xl mx-auto">
+      <div class="max-w-5xl mx-auto pr-10 md:pr-0">
         <p
           class="text-3xl md:text-5xl font-bold leading-tight mb-8 border-l-8 border-white pl-6"
         >
@@ -354,7 +470,7 @@ const currentYear = new Date().getFullYear();
     </section>
 
     <!-- Footer -->
-    <footer class="border-t-4 border-black p-8 md:p-16">
+    <footer id="contact" class="border-t-4 border-black p-8 md:p-16">
       <div class="max-w-6xl mx-auto">
         <div class="mb-12 pb-12 border-b-4 border-black">
           <h2 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">
