@@ -1,18 +1,66 @@
 ---
+import { SEO } from "astro-seo";
+
 interface Props {
   title?: string;
+  description?: string;
 }
 
-const { title = "BLACKTAR ENGINEERING WORKS" } = Astro.props;
+const {
+  title = "BLACKTAR ENGINEERING WORKS",
+  description = "We build software that moves fast, scales hard, and delivers results. From early-stage disruptors to established category leaders, we engineer systems that perform under pressure.",
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <SEO
+      title={title}
+      description={description}
+      charset="UTF-8"
+      openGraph={{
+        basic: {
+          title: title,
+          type: "website",
+          image: `${Astro.url.origin}/android-chrome-512x512.png`,
+          url: Astro.url.href,
+        },
+        optional: {
+          description: description,
+          siteName: "BLACKTAR ENGINEERING WORKS",
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+      }}
+      extend={{
+        link: [
+          { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+          {
+            rel: "icon",
+            type: "image/png",
+            sizes: "16x16",
+            href: "/favicon-16x16.png",
+          },
+          {
+            rel: "icon",
+            type: "image/png",
+            sizes: "32x32",
+            href: "/favicon-32x32.png",
+          },
+          {
+            rel: "apple-touch-icon",
+            sizes: "180x180",
+            href: "/apple-touch-icon.png",
+          },
+          { rel: "manifest", href: "/site.webmanifest" },
+        ],
+        meta: [
+          { name: "viewport", content: "width=device-width, initial-scale=1.0" },
+        ],
+      }}
+    />
   </head>
   <body>
     <slot />
