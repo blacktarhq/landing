@@ -1,44 +1,45 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'BrutalistMono';
-  src: url('/fonts/BrutalistMono.ttf') format('truetype');
-  font-weight: normal;
+  font-family: 'MartianMono';
+  src: url('/fonts/MartianMono-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-stretch: 75% 125%;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'BrutalistMono';
-  src: url('/fonts/BrutalistMono-Bold.ttf') format('truetype');
-  font-weight: bold;
+  font-family: 'MartianMono';
+  src: url('/fonts/MartianMono-Regular.ttf') format('truetype');
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'BrutalistMono';
-  src: url('/fonts/BrutalistMono-Oblique.ttf') format('truetype');
-  font-weight: normal;
-  font-style: italic;
+  font-family: 'MartianMono';
+  src: url('/fonts/MartianMono-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'BrutalistMono';
-  src: url('/fonts/BrutalistMono-BoldOblique.ttf') format('truetype');
-  font-weight: bold;
-  font-style: italic;
+  font-family: 'MartianMono';
+  src: url('/fonts/MartianMono-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
   font-display: swap;
 }
 
 @theme {
-  --font-mono: 'BrutalistMono', 'Courier New', Courier, Monaco, monospace;
+  --font-mono: 'MartianMono', 'Courier New', Courier, Monaco, monospace;
 }
 
 body {
   background-color: #fff;
-  font-family: 'BrutalistMono', 'Courier New', Courier, Monaco, monospace;
+  font-family: 'MartianMono', 'Courier New', Courier, Monaco, monospace;
   letter-spacing: 0.05em;
   font-weight: normal;
   color: #000;
