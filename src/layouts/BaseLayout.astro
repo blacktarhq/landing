@@ -1,5 +1,6 @@
 ---
 import { SEO } from "astro-seo";
+import CookieBanner from "../components/CookieBanner.astro";
 
 interface Props {
   title?: string;
@@ -64,9 +65,17 @@ const {
         ],
       }}
     />
+    <script
+      is:inline
+      data-astro-rerun
+      defer
+      src="https://analytics.nstlopez.com/kebab-de-pollo"
+      data-website-id="fa470302-39e1-4317-ad92-68d675e78cc9"
+    ></script>
   </head>
   <body>
     <slot />
+    <CookieBanner />
   </body>
 </html>
 

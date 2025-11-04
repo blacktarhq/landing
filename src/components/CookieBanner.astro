@@ -1,0 +1,193 @@
+---
+// GDPR-compliant cookie banner component
+---
+
+<div id="cookie-banner" class="cookie-banner hidden">
+  <div class="cookie-banner-content">
+    <div class="cookie-banner-text">
+      <p>
+        We use analytics cookies to understand how you use our website and
+        improve your experience. You can learn more in our
+        <a href="/privacy">privacy policy</a>.
+      </p>
+    </div>
+    <div class="cookie-banner-actions">
+      <button id="cookie-accept" class="cookie-btn cookie-accept">
+        Accept
+      </button>
+      <button id="cookie-decline" class="cookie-btn cookie-decline">
+        Decline
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Cookie consent management
+  const CONSENT_KEY = "cookie-consent";
+  const banner = document.getElementById("cookie-banner");
+  const acceptBtn = document.getElementById("cookie-accept");
+  const declineBtn = document.getElementById("cookie-decline");
+
+  // Check if user has already made a choice
+  function getConsent(): string | null {
+    return localStorage.getItem(CONSENT_KEY);
+  }
+
+  // Show banner if no consent decision has been made
+  function showBanner() {
+    const consent = getConsent();
+    if (consent === null && banner) {
+      banner.classList.remove("hidden");
+    }
+  }
+
+  // Hide banner
+  function hideBanner() {
+    if (banner) {
+      banner.classList.add("hidden");
+    }
+  }
+
+  // Handle accept
+  function handleAccept() {
+    localStorage.setItem(CONSENT_KEY, "accepted");
+    hideBanner();
+    // Reload to enable analytics
+    window.location.reload();
+  }
+
+  // Handle decline
+  function handleDecline() {
+    localStorage.setItem(CONSENT_KEY, "declined");
+    hideBanner();
+  }
+
+  // Check if analytics should be loaded
+  function shouldLoadAnalytics(): boolean {
+    return getConsent() === "accepted";
+  }
+
+  // Remove analytics script if user declined
+  if (!shouldLoadAnalytics()) {
+    const analyticsScript = document.querySelector(
+      'script[data-website-id="fa470302-39e1-4317-ad92-68d675e78cc9"]'
+    );
+    if (analyticsScript) {
+      analyticsScript.remove();
+    }
+  }
+
+  // Event listeners
+  acceptBtn?.addEventListener("click", handleAccept);
+  declineBtn?.addEventListener("click", handleDecline);
+
+  // Show banner on page load if needed
+  showBanner();
+</script>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    max-width: 400px;
+    background-color: #fff;
+    color: #000;
+    padding: 1.5rem;
+    z-index: 9999;
+    border: 4px solid #000;
+    box-shadow: 8px 8px 0 #000;
+    font-family: "MartianMono", "Courier New", Courier, Monaco, monospace;
+  }
+
+  @media (max-width: 768px) {
+    .cookie-banner {
+      bottom: 1rem;
+      right: 1rem;
+      left: 1rem;
+      max-width: none;
+    }
+  }
+
+  .cookie-banner.hidden {
+    display: none;
+  }
+
+  .cookie-banner-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cookie-banner-text {
+    flex: 1;
+  }
+
+  .cookie-banner-text p {
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    letter-spacing: 0.05em;
+  }
+
+  .cookie-banner-text a {
+    color: #000;
+    text-decoration: underline;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .cookie-banner-text a:hover {
+    color: #0f0;
+  }
+
+  .cookie-banner-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .cookie-btn {
+    padding: 0.6rem 1rem;
+    border: 3px solid #000;
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: inherit;
+    transition: all 0.15s;
+    flex: 1;
+  }
+
+  .cookie-btn:hover {
+    transform: translate(-2px, -2px);
+  }
+
+  .cookie-accept {
+    background-color: #000;
+    color: #fff;
+    border-color: #000;
+  }
+
+  .cookie-accept:hover {
+    box-shadow: 4px 4px 0 #000;
+  }
+
+  .cookie-decline {
+    background-color: #fff;
+    color: #000;
+  }
+
+  .cookie-decline:hover {
+    box-shadow: 4px 4px 0 #000;
+  }
+
+  .cookie-btn:active {
+    transform: translate(0, 0);
+    box-shadow: none;
+  }
+</style>
