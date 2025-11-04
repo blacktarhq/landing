@@ -48,11 +48,115 @@ const currentYear = new Date().getFullYear();
     </section>
 
     <section
+      id="services"
+      class="relative border-t-4 border-black"
+    >
+      <div
+        class="absolute top-0 bottom-0 right-2 z-10 w-6 overflow-hidden md:right-4 md:w-8"
+      >
+        <div
+          class="animate-scroll-vertical text-xs font-bold tracking-wider whitespace-nowrap md:text-base"
+          style="writing-mode: vertical-rl; text-orientation: mixed;"
+        >
+          SERVICIOS • SERVICIOS • SERVICIOS • SERVICIOS • SERVICIOS • SERVICIOS •
+          SERVICIOS • SERVICIOS • SERVICIOS • SERVICIOS • SERVICIOS • SERVICIOS •
+          SERVICIOS • SERVICIOS • SERVICIOS • SERVICIOS • SERVICIOS • SERVICIOS •
+          SERVICIOS • SERVICIOS • SERVICIOS • SERVICIOS • SERVICIOS • SERVICIOS •
+        </div>
+      </div>
+
+      <div class="mx-auto max-w-7xl p-8 pr-10 md:p-16">
+        <h2 class="mb-12 text-3xl leading-tight font-bold md:text-5xl">
+          QUÉ HACEMOS<span class="text-red-600">.</span>
+        </h2>
+        <div class="mb-12 border-l-4 border-black pl-4">
+          <p class="text-sm leading-relaxed opacity-90">
+            NO SOLO ESCRIBIMOS CÓDIGO. ARQUITECTAMOS SISTEMAS, DISEÑAMOS
+            SOLUCIONES Y CONSTRUIMOS PRODUCTOS QUE ESCALAN. DESDE EL CONCEPTO
+            INICIAL HASTA EL DESPLIEGUE EN PRODUCCIÓN Y MÁS ALLÁ.
+          </p>
+        </div>
+
+        <div class="grid gap-8 md:grid-cols-2">
+          {
+            [
+              {
+                number: "01",
+                title: "DESARROLLO DE SOFTWARE PERSONALIZADO",
+                desc: "Desarrollo full-stack adaptado a tus necesidades. Construimos aplicaciones web, APIs y sistemas backend que manejan escala real. Stacks tecnológicos modernos, arquitectura limpia, testing automatizado.",
+                keywords: "REACT / TYPESCRIPT / NODE.JS / PYTHON / RUST / GO",
+              },
+              {
+                number: "02",
+                title: "CONSULTORÍA TÉCNICA",
+                desc: "Revisiones de arquitectura, decisiones de stack tecnológico, optimización de rendimiento. Ayudamos a equipos a tomar mejores decisiones técnicas. Auditorías de código, planificación de escalabilidad y due diligence técnica para inversores.",
+                keywords: "ARQUITECTURA / RENDIMIENTO / ESCALABILIDAD / AUDITORÍAS",
+              },
+              {
+                number: "03",
+                title: "CTO ON DEMAND",
+                desc: "Liderazgo técnico estratégico cuando lo necesitas. Actuamos como tu CTO fraccional para guiar estrategia de producto, construir equipos de ingeniería y tomar decisiones técnicas críticas. Desde startups tempranas hasta empresas en escalamiento.",
+                keywords: "ESTRATEGIA / CONSTRUCCIÓN DE EQUIPOS / ARQUITECTURA / LIDERAZGO",
+              },
+              {
+                number: "04",
+                title: "INTEGRACIONES DE SISTEMAS",
+                desc: "Conecta tus herramientas y automatiza tus flujos de trabajo. APIs, webhooks, pipelines ETL, sincronización de datos. Hacemos que sistemas dispares trabajen juntos sin problemas.",
+                keywords: "REST / GRAPHQL / WEBHOOKS / COLAS DE MENSAJES / ETL",
+              },
+            ].map((service) => (
+              <div class="border-4 border-black p-6 transition-all hover:bg-black hover:text-white">
+                <div class="mb-4 flex items-start gap-4">
+                  <div class="text-4xl font-bold opacity-50">
+                    {service.number}
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="mb-3 text-xl font-bold leading-tight md:text-2xl">
+                      {service.title}
+                    </h3>
+                  </div>
+                </div>
+                <p class="mb-4 text-sm leading-relaxed opacity-90 md:text-base">
+                  {service.desc}
+                </p>
+                <div class="border-t-2 border-current pt-3 text-xs font-bold opacity-70">
+                  {service.keywords}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="mt-12 border-l-4 p-8" style="border-color: #000; background-color: #000; color: #fff;">
+          <p class="mb-6 text-lg font-bold md:text-xl">
+            ¿LISTO PARA EMPEZAR TU PROYECTO?
+          </p>
+          <p class="mb-6 text-sm leading-relaxed opacity-90 md:text-base">
+            Agenda una llamada de 30 minutos para discutir tu proyecto. Sin
+            pitch de ventas, solo una conversación técnica sobre lo que estás
+            construyendo y cómo podemos ayudar.
+          </p>
+          <a
+            href="https://cal.com/nstlopez"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block border-4 px-8 py-4 text-sm font-bold transition-all md:text-base"
+            style="border-color: #fff; background-color: #fff; color: #000;"
+            onmouseover="this.style.backgroundColor='#000'; this.style.color='#fff';"
+            onmouseout="this.style.backgroundColor='#fff'; this.style.color='#000';"
+          >
+            AGENDAR LLAMADA →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section
       id="work"
       class="relative border-t-4 border-black bg-black text-white"
     >
       <div
-        class="absolute top-0 right-2 bottom-0 z-10 w-6 overflow-hidden md:right-4 md:w-8"
+        class="absolute top-0 bottom-0 left-2 z-10 w-6 overflow-hidden md:left-4 md:w-8"
       >
         <div
           class="animate-scroll-vertical text-xs font-bold tracking-wider whitespace-nowrap md:text-base"
@@ -65,7 +169,7 @@ const currentYear = new Date().getFullYear();
         </div>
       </div>
 
-      <div class="mx-auto max-w-7xl p-8 pr-10 md:p-16">
+      <div class="mx-auto max-w-7xl p-8 pl-10 md:p-16">
         <h2 class="mb-12 text-3xl leading-tight font-bold md:text-5xl">
           TRABAJO SELECCIONADO
         </h2>
@@ -145,7 +249,7 @@ const currentYear = new Date().getFullYear();
 
     <section class="relative border-t-4 border-black">
       <div
-        class="absolute top-0 bottom-0 left-2 z-10 w-6 overflow-hidden md:left-4 md:w-8"
+        class="absolute top-0 bottom-0 right-2 z-10 w-6 overflow-hidden md:right-4 md:w-8"
       >
         <div
           class="animate-scroll-vertical text-xs font-bold tracking-wider whitespace-nowrap md:text-base"
@@ -156,7 +260,7 @@ const currentYear = new Date().getFullYear();
         </div>
       </div>
 
-      <div class="mx-auto max-w-7xl p-8 pl-10 md:p-16">
+      <div class="mx-auto max-w-7xl p-8 pr-10 md:p-16">
         <h2 class="mb-12 text-3xl leading-tight font-bold md:text-5xl">
           CONTRIBUCIONES DE CÓDIGO ABIERTO
         </h2>
@@ -265,7 +369,7 @@ const currentYear = new Date().getFullYear();
       class="relative border-t-4 border-black bg-black p-8 text-white md:p-16"
     >
       <div
-        class="absolute top-0 right-2 bottom-0 z-10 w-6 overflow-hidden md:right-4 md:w-8"
+        class="absolute top-0 bottom-0 left-2 z-10 w-6 overflow-hidden md:left-4 md:w-8"
       >
         <div
           class="animate-scroll-vertical text-xs font-bold tracking-wider whitespace-nowrap md:text-base"
@@ -277,7 +381,7 @@ const currentYear = new Date().getFullYear();
         </div>
       </div>
 
-      <div class="mx-auto max-w-5xl pr-10 md:pr-0">
+      <div class="mx-auto max-w-5xl pl-10 md:pl-0">
         <p
           class="mb-8 border-l-8 border-white pl-6 text-3xl leading-tight font-bold md:text-5xl"
         >
