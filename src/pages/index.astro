@@ -70,45 +70,43 @@ const currentYear = new Date().getFullYear();
         <h2 class="mb-12 text-3xl leading-tight font-bold md:text-5xl">
           SELECTED WORK
         </h2>
+        <div class="mb-8 border-l-4 border-white pl-4">
+          <p class="text-sm leading-relaxed opacity-90">
+            FROM ZERO TO ONE OR ONE TO MILLION. WE BUILD SYSTEMS THAT SCALE,
+            CODE THAT LASTS, AND INFRASTRUCTURE THAT DOESN'T BREAK AT 3AM. LET'S
+            SHIP SOMETHING THAT MATTERS.
+          </p>
+        </div>
 
         <div class="space-y-8">
           {
             [
               {
                 name: "ZEPHYR CLOUD",
-                subtitle: "CLOUD INFRASTRUCTURE PLATFORM",
-                client: "ENTERPRISE TECH COMPANY",
-                desc: "Multi-region cloud orchestration that just works. Auto-scaling infrastructure across global data centers. Built for enterprises that can't afford downtime. Performance monitoring that predicts issues before they happen.",
-                tech: "GO / KUBERNETES / TERRAFORM / AWS",
-                year: "2024",
+                subtitle: "PLATFORM ARCHITECTURE",
+                client: "MICRO-FRONTEND ORCHESTRATION PLATFORM",
+                desc: "Cloud- and framework-agnostic platform for orchestrating Micro-Frontends at enterprise scale. Centralizes MFE lifecycle management and observability, enables ~400ms code-to-deploy, and supports BYOC integrations (Cloudflare/Netlify; AWS/Azure/GCP in progress) via lightweight packages for Rspack/Webpack and Vite/Rollup.",
+                tech: "TYPESCRIPT / RUST / MODULE FEDERATION / CLOUD PROVIDERS",
+                year: "2025",
                 number: "01",
               },
               {
                 name: "FEVER",
                 subtitle: "EVENT DISCOVERY & TICKETING PLATFORM",
-                client: "ENTERTAINMENT STARTUP",
-                desc: "Real-time event booking for millions of users. Dynamic pricing algorithms that maximize revenue. Seamless payment processing across multiple currencies. Mobile-first experience that converts.",
-                tech: "REACT / NODE.JS / POSTGRESQL / STRIPE",
+                client: "ENTERTAINMENT PLATFORM",
+                desc: "Rolled out self‑service kiosks on custom Android/Linux to standardize on‑site operations. Modernized the platform (Angular 16 → 19; Django monolith → Python microservices with CQRS/DDD) and added IAM plus WireGuard‑secured access.",
+                tech: "ANDROID / ANGULAR 19 / FASTAPI / FLASK / PYTHON / WIREGUARD",
                 year: "2024",
                 number: "02",
-              },
-              {
-                name: "ZENROWS",
-                subtitle: "WEB SCRAPING API SERVICE",
-                client: "DATA INTELLIGENCE COMPANY",
-                desc: "Industrial-grade web scraping that bypasses any protection. Rotating proxies and smart retry logic. Processing millions of requests daily with 99.9% uptime. Data extraction made simple.",
-                tech: "PYTHON / REDIS / MONGODB / SCRAPY",
-                year: "2023",
-                number: "03",
               },
               {
                 name: "NEXIONA",
                 subtitle: "IOT CONNECTIVITY SOLUTION",
                 client: "INDUSTRIAL IOT PROVIDER",
-                desc: "Connecting millions of devices in real-time. Low-latency communication protocol for industrial applications. Edge computing that processes data locally. Built for the most demanding environments.",
-                tech: "C++ / MQTT / TIMESCALEDB / DOCKER",
-                year: "2023",
-                number: "04",
+                desc: "Delivered MIIMETIQ and IoT platforms at scale: +30% event throughput with Celery, MQTT and AMQP (RabbitMQ) integrations, automated infra (WireGuard/Terraform/Ansible), and a Yocto‑based Edge OS; modernization cut onboarding time 85%.",
+                tech: "REACT / TYPESCRIPT / FASTAPI / CELERY / MQTT / RABBITMQ / TERRAFORM / YOCTO",
+                year: "2021 2022 2023 2024",
+                number: "03",
               },
             ].map((project) => (
               <div class="border-b-2 border-l-4 border-white pb-6 pl-4">
@@ -142,15 +140,7 @@ const currentYear = new Date().getFullYear();
           }
         </div>
 
-        <div class="mt-12 border-t-2 border-white pt-8">
-          <p
-            class="border-l-4 border-white pl-4 text-sm leading-relaxed opacity-90"
-          >
-            FROM ZERO TO ONE OR ONE TO MILLION. WE BUILD SYSTEMS THAT SCALE,
-            CODE THAT LASTS, AND INFRASTRUCTURE THAT DOESN'T BREAK AT 3AM. LET'S
-            SHIP SOMETHING THAT MATTERS.
-          </p>
-        </div>
+        
       </div>
     </section>
 
@@ -174,6 +164,13 @@ const currentYear = new Date().getFullYear();
         <h2 class="mb-12 text-3xl leading-tight font-bold md:text-5xl">
           OPEN SOURCE CONTRIBUTIONS
         </h2>
+        <div class="mb-8 border-l-4 border-black pl-4">
+          <p class="text-sm leading-relaxed opacity-90">
+            FROM ZERO TO ONE OR ONE TO MILLION. WE BUILD SYSTEMS THAT SCALE,
+            CODE THAT LASTS, AND INFRASTRUCTURE THAT DOESN'T BREAK AT 3AM. LET'S
+            SHIP SOMETHING THAT MATTERS.
+          </p>
+        </div>
 
         <div class="space-y-8">
           {
@@ -183,7 +180,7 @@ const currentYear = new Date().getFullYear();
                 subtitle: "MICRO-FRONTEND ARCHITECTURE",
                 repo: "GITHUB.COM/MODULE-FEDERATION",
                 desc: "Revolutionary approach to building scalable micro-frontends. Share code between applications at runtime. Independent deployments without sacrificing performance. The future of frontend architecture.",
-                tech: "JAVASCRIPT / WEBPACK / TYPESCRIPT",
+                tech: "JAVASCRIPT / TYPESCRIPT",
                 stars: "8.5K",
                 number: "01",
               },
@@ -219,7 +216,7 @@ const currentYear = new Date().getFullYear();
                 subtitle: "END-TO-END TYPESAFE APIS",
                 repo: "GITHUB.COM/TRPC/TRPC",
                 desc: "Build fully typesafe APIs without schemas or code generation. Autocompletion across client and server. Runtime validation that catches errors early. TypeScript at its best.",
-                tech: "TYPESCRIPT / ZQUERY / REACT",
+                tech: "TYPESCRIPT / REACT",
                 stars: "32K",
                 number: "05",
               },
@@ -242,9 +239,14 @@ const currentYear = new Date().getFullYear();
                         {project.stars}
                       </div>
                     </div>
-                    <div class="mb-2 inline-block border-b border-black pb-1 text-sm opacity-80">
+                    <a
+                      href={`https://${project.repo.toLowerCase()}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="mb-2 inline-block border-b border-black pb-1 text-sm opacity-80 hover:opacity-100"
+                    >
                       {project.repo}
-                    </div>
+                    </a>
                     <p class="mb-2 text-sm leading-relaxed opacity-90">
                       {project.desc}
                     </p>
@@ -258,16 +260,7 @@ const currentYear = new Date().getFullYear();
           }
         </div>
 
-        <div class="mt-12 border-t-2 border-black pt-8">
-          <p
-            class="border-l-4 border-black pl-4 text-sm leading-relaxed opacity-90"
-          >
-            WE BELIEVE IN GIVING BACK TO THE COMMUNITY. THESE ARE THE PROJECTS
-            WE'VE CONTRIBUTED TO, HELPING SHAPE THE FUTURE OF WEB DEVELOPMENT.
-            FROM CORE FEATURES TO PERFORMANCE IMPROVEMENTS, WE'RE COMMITTED TO
-            OPEN SOURCE.
-          </p>
-        </div>
+        
       </div>
     </section>
 

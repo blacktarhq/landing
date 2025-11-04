@@ -69,6 +69,13 @@ const currentYear = new Date().getFullYear();
         <h2 class="mb-12 text-3xl leading-tight font-bold md:text-5xl">
           TRABAJO SELECCIONADO
         </h2>
+        <div class="mb-8 border-l-4 border-white pl-4">
+          <p class="text-sm leading-relaxed opacity-90">
+            FROM ZERO TO ONE OR ONE TO MILLION. WE BUILD SYSTEMS THAT SCALE,
+            CODE THAT LASTS, AND INFRASTRUCTURE THAT DOESN'T BREAK AT 3AM. LET'S
+            SHIP SOMETHING THAT MATTERS.
+          </p>
+        </div>
 
         <div class="space-y-8">
           {
@@ -92,22 +99,13 @@ const currentYear = new Date().getFullYear();
                 number: "02",
               },
               {
-                name: "ZENROWS",
-                subtitle: "SERVICIO API DE WEB SCRAPING",
-                client: "EMPRESA DE INTELIGENCIA DE DATOS",
-                desc: "Web scraping de grado industrial que supera cualquier protección. Proxies rotativos y lógica de reintentos inteligente. Procesando millones de solicitudes diarias con 99.9% de tiempo de actividad. Extracción de datos simplificada.",
-                tech: "PYTHON / REDIS / MONGODB / SCRAPY",
-                year: "2023",
-                number: "03",
-              },
-              {
                 name: "NEXIONA",
                 subtitle: "SOLUCIÓN DE CONECTIVIDAD IOT",
                 client: "PROVEEDOR IOT INDUSTRIAL",
                 desc: "Conectando millones de dispositivos en tiempo real. Protocolo de comunicación de baja latencia para aplicaciones industriales. Computación en el borde que procesa datos localmente. Construido para los entornos más exigentes.",
                 tech: "C++ / MQTT / TIMESCALEDB / DOCKER",
-                year: "2023",
-                number: "04",
+                year: "2021 2022 2023 2024",
+                number: "03",
               },
             ].map((project) => (
               <div class="border-b-2 border-l-4 border-white pb-6 pl-4">
@@ -141,15 +139,7 @@ const currentYear = new Date().getFullYear();
           }
         </div>
 
-        <div class="mt-12 border-t-2 border-white pt-8">
-          <p
-            class="border-l-4 border-white pl-4 text-sm leading-relaxed opacity-90"
-          >
-            DE CERO A UNO O DE UNO A MILLÓN. CONSTRUIMOS SISTEMAS QUE ESCALAN,
-            CÓDIGO QUE PERDURA E INFRAESTRUCTURA QUE NO SE ROMPE A LAS 3AM.
-            CONSTRUYAMOS ALGO QUE IMPORTE.
-          </p>
-        </div>
+        
       </div>
     </section>
 
@@ -170,6 +160,13 @@ const currentYear = new Date().getFullYear();
         <h2 class="mb-12 text-3xl leading-tight font-bold md:text-5xl">
           CONTRIBUCIONES DE CÓDIGO ABIERTO
         </h2>
+        <div class="mb-8 border-l-4 border-black pl-4">
+          <p class="text-sm leading-relaxed opacity-90">
+            FROM ZERO TO ONE OR ONE TO MILLION. WE BUILD SYSTEMS THAT SCALE,
+            CODE THAT LASTS, AND INFRASTRUCTURE THAT DOESN'T BREAK AT 3AM. LET'S
+            SHIP SOMETHING THAT MATTERS.
+          </p>
+        </div>
 
         <div class="space-y-8">
           {
@@ -179,7 +176,7 @@ const currentYear = new Date().getFullYear();
                 subtitle: "ARQUITECTURA MICRO-FRONTEND",
                 repo: "GITHUB.COM/MODULE-FEDERATION",
                 desc: "Enfoque revolucionario para construir micro-frontends escalables. Comparte código entre aplicaciones en tiempo de ejecución. Despliegues independientes sin sacrificar rendimiento. El futuro de la arquitectura frontend.",
-                tech: "JAVASCRIPT / WEBPACK / TYPESCRIPT",
+                tech: "JAVASCRIPT / TYPESCRIPT",
                 stars: "8.5K",
                 number: "01",
               },
@@ -215,7 +212,7 @@ const currentYear = new Date().getFullYear();
                 subtitle: "APIS CON TIPADO SEGURO DE EXTREMO A EXTREMO",
                 repo: "GITHUB.COM/TRPC/TRPC",
                 desc: "Construye APIs completamente tipadas sin esquemas ni generación de código. Autocompletado entre cliente y servidor. Validación en tiempo de ejecución que detecta errores temprano. TypeScript en su mejor momento.",
-                tech: "TYPESCRIPT / ZQUERY / REACT",
+                tech: "TYPESCRIPT / REACT",
                 stars: "32K",
                 number: "05",
               },
@@ -238,9 +235,14 @@ const currentYear = new Date().getFullYear();
                         {project.stars}
                       </div>
                     </div>
-                    <div class="mb-2 inline-block border-b border-black pb-1 text-sm opacity-80">
+                    <a
+                      href={`https://${project.repo.toLowerCase()}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="mb-2 inline-block border-b border-black pb-1 text-sm opacity-80 hover:opacity-100"
+                    >
                       {project.repo}
-                    </div>
+                    </a>
                     <p class="mb-2 text-sm leading-relaxed opacity-90">
                       {project.desc}
                     </p>
@@ -254,16 +256,7 @@ const currentYear = new Date().getFullYear();
           }
         </div>
 
-        <div class="mt-12 border-t-2 border-black pt-8">
-          <p
-            class="border-l-4 border-black pl-4 text-sm leading-relaxed opacity-90"
-          >
-            CREEMOS EN DEVOLVER A LA COMUNIDAD. ESTOS SON LOS PROYECTOS A LOS
-            QUE HEMOS CONTRIBUIDO, AYUDANDO A DAR FORMA AL FUTURO DEL DESARROLLO
-            WEB. DESDE CARACTERÍSTICAS PRINCIPALES HASTA MEJORAS DE RENDIMIENTO,
-            ESTAMOS COMPROMETIDOS CON EL CÓDIGO ABIERTO.
-          </p>
-        </div>
+        
       </div>
     </section>
 
