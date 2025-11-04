@@ -1,0 +1,157 @@
+---
+import { Github, Linkedin } from "@lucide/astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+interface Props {
+  locale?: "en" | "es";
+  variant?: "full" | "simple";
+}
+
+const { locale = "en", variant = "full" } = Astro.props;
+const isEs = locale === "es";
+const currentYear = new Date().getFullYear();
+
+const privacyUrl = isEs
+  ? getRelativeLocaleUrl("es", "privacy")
+  : getRelativeLocaleUrl("en", "privacy");
+const termsUrl = isEs
+  ? getRelativeLocaleUrl("es", "terms")
+  : getRelativeLocaleUrl("en", "terms");
+---
+
+{
+  variant === "full" ? (
+    <footer id="contact" class="border-t-4 border-black p-8 md:p-16">
+      <div class="mx-auto max-w-6xl">
+        <div class="mb-12 border-b-4 border-black pb-12">
+          <h2 class="mb-4 text-4xl leading-tight font-bold md:text-6xl">
+            {isEs
+              ? "CONSTRUYAMOS ALGO QUE ENVÍE"
+              : "LET'S BUILD SOMETHING THAT SHIPS"}
+          </h2>
+          <p class="border-l-4 border-black pl-4 text-lg opacity-90 md:text-xl">
+            {isEs
+              ? "¿LISTO PARA MOVERTE RÁPIDO Y CONSTRUIR COSAS? HABLEMOS."
+              : "READY TO MOVE FAST AND BUILD THINGS? LET'S TALK."}
+          </p>
+        </div>
+
+        <div class="mb-8 grid gap-8 md:grid-cols-3">
+          <div class="border-l-4 border-black pl-4">
+            <div class="mb-2 inline-block border-b-2 border-black pb-1 text-sm font-bold">
+              {isEs ? "CONTACTO" : "CONTACT"}
+            </div>
+            <div class="text-sm leading-relaxed">
+              <div>
+                INFO<span class="opacity-50">[at]</span>BLACKTAR
+                <span class="opacity-50">[dot]</span>WORKS
+              </div>
+              <div class="mt-2 opacity-70">
+                {isEs
+                  ? "Para consultas de proyectos, asociaciones o preguntas generales."
+                  : "For project inquiries, partnerships, or general questions."}
+              </div>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-black pl-4">
+            <div class="mb-2 inline-block border-b-2 border-black pb-1 text-sm font-bold">
+              {isEs ? "UBICACIÓN" : "LOCATION"}
+            </div>
+            <div class="text-sm leading-relaxed">
+              <div>{isEs ? "PRIMERO REMOTO" : "REMOTE FIRST"}</div>
+              <div class="mt-2 opacity-70">
+                {isEs
+                  ? "Trabajamos con clientes en todo el mundo. Con base principalmente en América del Norte y Europa."
+                  : "We work with clients worldwide. Based primarily in North America and Europe."}
+              </div>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-black pl-4">
+            <div class="mb-2 inline-block border-b-2 border-black pb-1 text-sm font-bold">
+              {isEs ? "CONECTAR" : "CONNECT"}
+            </div>
+            <div class="space-y-2 text-sm leading-relaxed">
+              <a
+                href="https://github.com/blacktarhq"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-2 transition-opacity hover:opacity-70"
+              >
+                <Github size={20} />
+                <span>GITHUB.COM/BLACKTARHQ</span>
+              </a>
+              <a
+                href="https://x.com/blacktarhq"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-2 transition-opacity hover:opacity-70"
+              >
+                <svg
+                  class="inline-block"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
+                </svg>
+                <span>X.COM/BLACKTARHQ</span>
+              </a>
+              <a
+                href="https://linkedin.com/company/blacktarhq"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-2 transition-opacity hover:opacity-70"
+              >
+                <Linkedin size={20} />
+                <span>LINKEDIN.COM/COMPANY/BLACKTARHQ</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col items-start justify-between gap-4 border-t-4 border-black pt-8 text-xs md:flex-row md:items-center">
+          <div class="border-l-4 border-black pl-4 font-bold">
+            © {currentYear} BLACKTAR ENGINEERING WORKS.{" "}
+            {isEs ? "TODOS LOS DERECHOS RESERVADOS." : "ALL RIGHTS RESERVED."}
+          </div>
+          <div class="flex gap-4 opacity-70">
+            <a
+              href={privacyUrl}
+              class="border-l-2 border-black pl-2 transition-opacity hover:opacity-100"
+            >
+              {isEs ? "POLÍTICA DE PRIVACIDAD" : "PRIVACY POLICY"}
+            </a>
+            <a
+              href={termsUrl}
+              class="border-l-2 border-black pl-2 transition-opacity hover:opacity-100"
+            >
+              {isEs ? "TÉRMINOS DE SERVICIO" : "TERMS OF SERVICE"}
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  ) : (
+    <footer class="mt-16 border-t-2 border-black p-8 md:p-16">
+      <div class="mx-auto max-w-6xl text-center">
+        <p class="text-sm opacity-70">
+          © {currentYear} BLACKTAR ENGINEERING WORKS.{" "}
+          {isEs ? "TODOS LOS DERECHOS RESERVADOS." : "ALL RIGHTS RESERVED."}
+        </p>
+        <div class="mt-4 flex justify-center gap-4 text-xs">
+          <a href={privacyUrl} class="transition-opacity hover:opacity-70">
+            {isEs ? "POLÍTICA DE PRIVACIDAD" : "PRIVACY POLICY"}
+          </a>
+          <a href={termsUrl} class="transition-opacity hover:opacity-70">
+            {isEs ? "TÉRMINOS DE SERVICIO" : "TERMS OF SERVICE"}
+          </a>
+        </div>
+      </div>
+    </footer>
+  )
+}

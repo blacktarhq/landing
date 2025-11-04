@@ -33,6 +33,7 @@ pnpm format
 ## Architecture
 
 ### Tech Stack
+
 - **React 19.1.1** with new JSX transform
 - **TypeScript 5.9.2** in strict mode
 - **Rsbuild** (Rust-based bundler) with minimal configuration
@@ -63,6 +64,7 @@ This project uses a **hybrid styling approach**:
    - Cross-browser form element styling
 
 **Design System Colors:**
+
 - Primary Beige: `#d1cdb7` (body background)
 - Accent Tan: `#dcd8c0` (overlays, inputs)
 - Dark Brown: `#454138` (text)
@@ -73,6 +75,7 @@ This project uses a **hybrid styling approach**:
 ### Animation System
 
 **TriangleReveal Component:**
+
 - Generates a grid of SVG triangles (200px × 100px each)
 - Uses overlapping grid pattern (base + offset) to eliminate gaps
 - SVG `<mask>` cuts through beige overlay to reveal content
@@ -81,6 +84,7 @@ This project uses a **hybrid styling approach**:
 - Callback `onComplete` removes component after animation
 
 **ThreeLunarTear Component:**
+
 - Physics-based 3D flower animation using custom `PhysicsNode` class
 - Mass-weighted components: flower (0.8), petals (1.2), stamens (0.5)
 - Mouse tracking with velocity calculation applies wind forces
@@ -101,13 +105,13 @@ The 3D flower uses a custom physics engine:
 
 ```typescript
 class PhysicsNode {
-  position: THREE.Vector3
-  velocity: THREE.Vector3
-  force: THREE.Vector3
-  mass: number
+  position: THREE.Vector3;
+  velocity: THREE.Vector3;
+  force: THREE.Vector3;
+  mass: number;
 
-  applyForce(force) // F = ma
-  update(damping)   // Apply velocity, damping, reset forces
+  applyForce(force); // F = ma
+  update(damping); // Apply velocity, damping, reset forces
 }
 ```
 
@@ -119,6 +123,7 @@ class PhysicsNode {
 ### Build System
 
 **Rsbuild** handles all bundling with minimal configuration. The React plugin automatically provides:
+
 - JSX/TSX compilation
 - Hot Module Replacement (HMR)
 - React Fast Refresh

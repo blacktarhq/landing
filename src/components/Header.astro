@@ -1,0 +1,82 @@
+---
+import { Menu } from "@lucide/astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+interface Props {
+  locale?: "en" | "es";
+  showNav?: boolean;
+}
+
+const { locale = "en", showNav = true } = Astro.props;
+const isEs = locale === "es";
+const homeUrl = isEs ? "/es" : "/";
+const switchLocaleUrl = isEs
+  ? getRelativeLocaleUrl("en", "")
+  : getRelativeLocaleUrl("es", "");
+const switchLocaleText = isEs ? "EN" : "ES";
+---
+
+<header
+  class="relative flex items-center justify-between border-b-2 border-black px-4 pt-3 pb-3 md:px-8 md:pt-6 md:pb-4"
+>
+  <a
+    href={homeUrl}
+    class="flex items-center gap-2 transition-opacity hover:opacity-70"
+  >
+    <img src="/logo.svg" alt="BlackTar" class="h-14 w-auto md:h-20" />
+    <div class="text-sm leading-tight font-bold md:text-base">
+      BLACKTAR<br />
+      ENGINEERING<br />
+      WORKS
+    </div>
+  </a>
+
+  {
+    showNav && (
+      <>
+        <nav class="hidden items-center gap-8 text-right text-sm font-bold md:flex md:text-base">
+          <a
+            href="#work"
+            class="border-l-2 border-black pl-4 transition-opacity hover:opacity-70"
+          >
+            {isEs ? "TRABAJO" : "WORK"}
+          </a>
+          <a
+            href="#about"
+            class="border-l-2 border-black pl-4 transition-opacity hover:opacity-70"
+          >
+            {isEs ? "ACERCA" : "ABOUT"}
+          </a>
+          <a
+            href="#contact"
+            class="border-l-2 border-black pl-4 transition-opacity hover:opacity-70"
+          >
+            {isEs ? "CONTACTO" : "CONTACT"}
+          </a>
+          <a
+            href={switchLocaleUrl}
+            class="border-l-2 border-black pl-4 transition-opacity hover:opacity-70"
+          >
+            {switchLocaleText}
+          </a>
+        </nav>
+
+        <div class="flex items-center gap-2 md:hidden">
+          <a
+            href={switchLocaleUrl}
+            class="text-sm font-bold transition-opacity hover:opacity-70"
+          >
+            {switchLocaleText}
+          </a>
+          <button
+            id="mobile-menu-button"
+            class="p-2 transition-opacity hover:opacity-70"
+            aria-label="Toggle menu"
+          >
+            <Menu size={32} stroke="black" stroke-width={2} />
+          </button>
+        </div>
+      </>
+    )
+  }
+</header>

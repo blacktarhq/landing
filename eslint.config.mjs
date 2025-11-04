@@ -1,3 +1,3 @@
-import nkzw from '@nkzw/eslint-config';
+import nkzw from "@nkzw/eslint-config";
 
 export default nkzw;

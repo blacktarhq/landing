@@ -1,0 +1,80 @@
+---
+import { X } from "@lucide/astro";
+
+interface Props {
+  locale?: "en" | "es";
+}
+
+const { locale = "en" } = Astro.props;
+const isEs = locale === "es";
+---
+
+<div
+  id="mobile-menu"
+  class="fixed inset-0 z-50 translate-x-full transform bg-white transition-transform duration-300 ease-in-out md:hidden"
+>
+  <div class="flex h-full flex-col">
+    <div class="flex items-center justify-between border-b-2 border-black p-4">
+      <div class="text-sm leading-tight font-bold">
+        {isEs ? "MENÚ" : "MENU"}
+      </div>
+      <button id="mobile-menu-close" class="p-2" aria-label="Close menu">
+        <X size={24} />
+      </button>
+    </div>
+
+    <nav class="flex flex-col gap-8 p-8 text-2xl font-bold">
+      <a
+        href="#work"
+        class="mobile-menu-link border-l-4 border-black py-2 pl-4 transition-colors hover:bg-black hover:text-white"
+      >
+        {isEs ? "TRABAJO" : "WORK"}
+      </a>
+      <a
+        href="#about"
+        class="mobile-menu-link border-l-4 border-black py-2 pl-4 transition-colors hover:bg-black hover:text-white"
+      >
+        {isEs ? "ACERCA" : "ABOUT"}
+      </a>
+      <a
+        href="#contact"
+        class="mobile-menu-link border-l-4 border-black py-2 pl-4 transition-colors hover:bg-black hover:text-white"
+      >
+        {isEs ? "CONTACTO" : "CONTACT"}
+      </a>
+    </nav>
+  </div>
+</div>
+
+<script>
+  // Mobile menu functionality
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const mobileMenuClose = document.getElementById("mobile-menu-close");
+  const mobileMenuLinks = document.querySelectorAll(".mobile-menu-link");
+
+  function openMenu() {
+    mobileMenu?.classList.remove("translate-x-full");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeMenu() {
+    mobileMenu?.classList.add("translate-x-full");
+    document.body.style.overflow = "";
+  }
+
+  mobileMenuButton?.addEventListener("click", openMenu);
+  mobileMenuClose?.addEventListener("click", closeMenu);
+
+  // Close menu when clicking a link
+  mobileMenuLinks.forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  // Close menu on escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeMenu();
+    }
+  });
+</script>

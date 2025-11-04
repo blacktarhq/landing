@@ -1,0 +1,21 @@
+---
+interface Props {
+  locale?: "en" | "es";
+}
+
+const { locale = "en" } = Astro.props;
+const homeUrl = locale === "es" ? "/es" : "/";
+---
+
+<header class="border-b-2 border-black px-4 py-3 md:px-8 md:py-6">
+  <a href={homeUrl} class="inline-block transition-opacity hover:opacity-70">
+    <div class="flex items-center gap-2">
+      <img src="/logo.svg" alt="BlackTar" class="h-14 w-auto md:h-20" />
+      <div class="text-sm leading-tight font-bold md:text-base">
+        BLACKTAR<br />
+        ENGINEERING<br />
+        WORKS
+      </div>
+    </div>
+  </a>
+</header>

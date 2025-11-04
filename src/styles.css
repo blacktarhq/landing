@@ -1,8 +1,12 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 @font-face {
-  font-family: 'MartianMono';
-  src: url('/fonts/MartianMono-Variable.ttf') format('truetype');
+  font-family: "MartianMono";
+  src: url("/fonts/MartianMono-Variable.ttf") format("truetype");
   font-weight: 100 900;
   font-stretch: 75% 125%;
   font-style: normal;
@@ -10,36 +14,36 @@
 }
 
 @font-face {
-  font-family: 'MartianMono';
-  src: url('/fonts/MartianMono-Regular.ttf') format('truetype');
+  font-family: "MartianMono";
+  src: url("/fonts/MartianMono-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'MartianMono';
-  src: url('/fonts/MartianMono-Medium.ttf') format('truetype');
+  font-family: "MartianMono";
+  src: url("/fonts/MartianMono-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'MartianMono';
-  src: url('/fonts/MartianMono-Bold.ttf') format('truetype');
+  font-family: "MartianMono";
+  src: url("/fonts/MartianMono-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @theme {
-  --font-mono: 'MartianMono', 'Courier New', Courier, Monaco, monospace;
+  --font-mono: "MartianMono", "Courier New", Courier, Monaco, monospace;
 }
 
 body {
   background-color: #fff;
-  font-family: 'MartianMono', 'Courier New', Courier, Monaco, monospace;
+  font-family: "MartianMono", "Courier New", Courier, Monaco, monospace;
   letter-spacing: 0.05em;
   font-weight: normal;
   color: #000;
@@ -62,7 +66,7 @@ p {
 
 mark {
   background-color: #000;
-  color: #0F0;
+  color: #0f0;
 }
 
 h1 {
@@ -140,9 +144,9 @@ th {
 
 pre {
   background-color: #000;
-  color: #0F0;
+  color: #0f0;
   padding: 2rem;
-  border: 3px solid #0F0;
+  border: 3px solid #0f0;
   overflow-x: auto;
 }
 
@@ -166,19 +170,19 @@ label {
 }
 
 textarea,
-input[type=text],
-input[type=password],
-input[type=url],
-input[type=email],
-input[type=tel],
-input[type=search],
-input[type=number],
-input[type=color],
-input[type=date],
-input[type=month],
-input[type=week],
-input[type=datetime],
-input[type=datetime-local] {
+input[type="text"],
+input[type="password"],
+input[type="url"],
+input[type="email"],
+input[type="tel"],
+input[type="search"],
+input[type="number"],
+input[type="color"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="datetime"],
+input[type="datetime-local"] {
   padding: 1rem;
   font-size: 1em;
   border: 3px solid #000;
@@ -215,7 +219,6 @@ select {
   cursor: pointer;
   width: 100%;
 }
-
 
 ::-webkit-input-placeholder {
   color: #999;

@@ -4,19 +4,19 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: "https://blacktar.works",
-
-  vite: {
-    plugins: [tailwindcss()],
+  i18n: {
+    defaultLocale: "en",
+    locales: ["es", "en"],
+    routing: {
+      prefixDefaultLocale: false,
+    },
   },
 
   integrations: [sitemap()],
 
-  i18n: {
-    locales: ["es", "en"],
-    defaultLocale: "en",
-    routing: {
-      prefixDefaultLocale: false,
-    },
+  site: "https://blacktar.works",
+
+  vite: {
+    plugins: [tailwindcss()],
   },
 });

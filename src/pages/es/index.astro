@@ -1,199 +1,74 @@
 ---
-import { Star, Github, Linkedin, X, Menu } from "@lucide/astro";
+import { Star } from "@lucide/astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getRelativeLocaleUrl } from "astro:i18n";
+import Header from "../../components/Header.astro";
+import MobileMenu from "../../components/MobileMenu.astro";
+import Footer from "../../components/Footer.astro";
 
 const currentYear = new Date().getFullYear();
 ---
 
 <BaseLayout>
   <div class="min-h-screen overflow-x-hidden">
-    <!-- Header -->
-    <header
-      class="border-b-2 border-black pt-3 md:pt-6 px-4 md:px-8 pb-3 md:pb-4 flex justify-between items-center relative"
-    >
-      <a href="/es" class="flex items-center gap-2 hover:opacity-70 transition-opacity">
-        <img src="/logo.svg" alt="BlackTar" class="h-14 md:h-20 w-auto" />
-        <div class="text-sm md:text-base font-bold leading-tight">
-          BLACKTAR<br />
-          ENGINEERING<br />
-          WORKS
-        </div>
-      </a>
+    <Header locale="es" />
+    <MobileMenu locale="es" />
 
-      <!-- Desktop Navigation -->
-      <nav
-        class="hidden md:flex text-sm md:text-base font-bold text-right gap-8 items-center"
-      >
-        <a
-          href="#work"
-          class="border-l-2 border-black pl-4 hover:opacity-70 transition-opacity"
-          >TRABAJO</a
-        >
-        <a
-          href="#about"
-          class="border-l-2 border-black pl-4 hover:opacity-70 transition-opacity"
-          >ACERCA</a
-        >
-        <a
-          href="#contact"
-          class="border-l-2 border-black pl-4 hover:opacity-70 transition-opacity"
-          >CONTACTO</a
-        >
-        <a
-          href={getRelativeLocaleUrl("en", "")}
-          class="border-l-2 border-black pl-4 hover:opacity-70 transition-opacity"
-          >EN</a
-        >
-      </nav>
-
-      <!-- Language Switcher (Mobile) -->
-      <div class="md:hidden flex items-center gap-2">
-        <a
-          href={getRelativeLocaleUrl("en", "")}
-          class="text-sm font-bold hover:opacity-70 transition-opacity"
-          >EN</a
-        >
-        <!-- Mobile Menu Button -->
-        <button
-          id="mobile-menu-button"
-          class="p-2 hover:opacity-70 transition-opacity"
-          aria-label="Toggle menu"
-        >
-          <Menu size={32} stroke="black" strokeWidth={2} />
-        </button>
-      </div>
-    </header>
-
-    <!-- Mobile Menu Overlay -->
-    <div
-      id="mobile-menu"
-      class="fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out md:hidden"
-    >
-      <div class="flex flex-col h-full">
-        <!-- Mobile Menu Header -->
-        <div
-          class="border-b-2 border-black p-4 flex justify-between items-center"
-        >
-          <div class="text-sm font-bold leading-tight">MENÚ</div>
-          <button id="mobile-menu-close" class="p-2" aria-label="Close menu">
-            <X size={24} />
-          </button>
-        </div>
-
-        <!-- Mobile Navigation Links -->
-        <nav class="flex flex-col p-8 gap-8 text-2xl font-bold">
-          <a
-            href="#work"
-            class="border-l-4 border-black pl-4 py-2 hover:bg-black hover:text-white transition-colors mobile-menu-link"
-            >TRABAJO</a
-          >
-          <a
-            href="#about"
-            class="border-l-4 border-black pl-4 py-2 hover:bg-black hover:text-white transition-colors mobile-menu-link"
-            >ACERCA</a
-          >
-          <a
-            href="#contact"
-            class="border-l-4 border-black pl-4 py-2 hover:bg-black hover:text-white transition-colors mobile-menu-link"
-            >CONTACTO</a
-          >
-        </nav>
-      </div>
-    </div>
-
-    <script>
-      // Mobile menu functionality
-      const mobileMenuButton = document.getElementById("mobile-menu-button");
-      const mobileMenu = document.getElementById("mobile-menu");
-      const mobileMenuClose = document.getElementById("mobile-menu-close");
-      const mobileMenuLinks = document.querySelectorAll(".mobile-menu-link");
-
-      function openMenu() {
-        mobileMenu?.classList.remove("translate-x-full");
-        document.body.style.overflow = "hidden";
-      }
-
-      function closeMenu() {
-        mobileMenu?.classList.add("translate-x-full");
-        document.body.style.overflow = "";
-      }
-
-      mobileMenuButton?.addEventListener("click", openMenu);
-      mobileMenuClose?.addEventListener("click", closeMenu);
-
-      // Close menu when clicking a link
-      mobileMenuLinks.forEach((link) => {
-        link.addEventListener("click", closeMenu);
-      });
-
-      // Close menu on escape key
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-          closeMenu();
-        }
-      });
-    </script>
-
-    <!-- Giant Hero Typography -->
     <section
-      class="min-h-[60vh] md:min-h-screen flex items-end justify-start p-4 md:p-8 pb-8 md:pb-32 relative"
+      class="relative flex min-h-[60vh] items-end justify-start p-4 pb-8 md:min-h-screen md:p-8 md:pb-32"
     >
-      <!-- Vertical text on left -->
-      <div
-        class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10"
-      >
+      <div class="absolute top-1/2 left-2 z-10 -translate-y-1/2 md:left-4">
         <div
-          class="text-xs md:text-sm font-bold tracking-wider"
+          class="text-xs font-bold tracking-wider md:text-sm"
           style="writing-mode: vertical-rl; text-orientation: mixed;"
         >
           EST. {currentYear}
         </div>
       </div>
 
-      <div class="w-full pl-6 pr-6 md:pl-8 md:pr-0">
-        <div class="mb-4 md:mb-8 max-w-4xl border-l-4 border-black pl-4 md:pl-6">
-          <p class="text-sm md:text-lg leading-relaxed mb-2 md:mb-4">
+      <div class="w-full pr-6 pl-6 md:pr-0 md:pl-8">
+        <div
+          class="mb-4 max-w-4xl border-l-4 border-black pl-4 md:mb-8 md:pl-6"
+        >
+          <p class="mb-2 text-sm leading-relaxed md:mb-4 md:text-lg">
             CONSTRUIMOS SOFTWARE QUE SE MUEVE RÁPIDO, ESCALA FUERTE Y ENTREGA
             RESULTADOS. DESDE DISRUPTORES EN ETAPA TEMPRANA HASTA LÍDERES DE
-            CATEGORÍA ESTABLECIDOS, DISEÑAMOS SISTEMAS QUE FUNCIONAN BAJO PRESIÓN.
+            CATEGORÍA ESTABLECIDOS, DISEÑAMOS SISTEMAS QUE FUNCIONAN BAJO
+            PRESIÓN.
           </p>
-          <p class="text-sm md:text-base leading-relaxed opacity-90">
+          <p class="text-sm leading-relaxed opacity-90 md:text-base">
             Sin rodeos. Sin compromisos. Solo código probado en batalla,
-            arquitectura escalable y sistemas construidos para manejar lo que sea
-            que les lances.
+            arquitectura escalable y sistemas construidos para manejar lo que
+            sea que les lances.
           </p>
         </div>
         <h1
-          class="text-[20vw] md:text-[28vw] font-bold leading-none border-t-4 border-b-4 border-black py-4"
+          class="border-t-4 border-b-4 border-black py-4 text-[20vw] leading-none font-bold md:text-[28vw]"
         >
           BTEW
         </h1>
       </div>
     </section>
 
-    <!-- Black Section with Project List -->
     <section
       id="work"
-      class="bg-black text-white border-t-4 border-black relative"
+      class="relative border-t-4 border-black bg-black text-white"
     >
-      <!-- Vertical text on right -->
       <div
-        class="absolute right-2 md:right-4 top-0 bottom-0 z-10 overflow-hidden w-6 md:w-8"
+        class="absolute top-0 right-2 bottom-0 z-10 w-6 overflow-hidden md:right-4 md:w-8"
       >
         <div
-          class="text-xs md:text-base font-bold tracking-wider animate-scroll-vertical whitespace-nowrap"
+          class="animate-scroll-vertical text-xs font-bold tracking-wider whitespace-nowrap md:text-base"
           style="writing-mode: vertical-rl; text-orientation: mixed;"
         >
-          PROYECTOS SELECCIONADOS • PROYECTOS SELECCIONADOS • PROYECTOS SELECCIONADOS •
-          PROYECTOS SELECCIONADOS • PROYECTOS SELECCIONADOS • PROYECTOS SELECCIONADOS •
-          PROYECTOS SELECCIONADOS • PROYECTOS SELECCIONADOS • PROYECTOS SELECCIONADOS •
+          PROYECTOS SELECCIONADOS • PROYECTOS SELECCIONADOS • PROYECTOS
+          SELECCIONADOS • PROYECTOS SELECCIONADOS • PROYECTOS SELECCIONADOS •
+          PROYECTOS SELECCIONADOS • PROYECTOS SELECCIONADOS • PROYECTOS
+          SELECCIONADOS • PROYECTOS SELECCIONADOS •
         </div>
       </div>
 
-      <!-- Projects List -->
-      <div class="p-8 pr-10 md:p-16 max-w-7xl mx-auto">
-        <h2 class="text-3xl md:text-5xl font-bold mb-12 leading-tight">
+      <div class="mx-auto max-w-7xl p-8 pr-10 md:p-16">
+        <h2 class="mb-12 text-3xl leading-tight font-bold md:text-5xl">
           TRABAJO SELECCIONADO
         </h2>
 
@@ -237,28 +112,28 @@ const currentYear = new Date().getFullYear();
                 number: "04",
               },
             ].map((project) => (
-              <div class="border-b-2 border-white pb-6 border-l-4 border-white pl-4">
-                <div class="flex items-start gap-4 mb-2">
+              <div class="border-b-2 border-l-4 border-white pb-6 pl-4">
+                <div class="mb-2 flex items-start gap-4">
                   <div class="text-3xl font-bold opacity-50">
                     {project.number}
                   </div>
                   <div class="flex-1">
-                    <div class="flex justify-between items-start mb-2">
+                    <div class="mb-2 flex items-start justify-between">
                       <div>
-                        <div class="text-xl md:text-2xl font-bold mb-1">
+                        <div class="mb-1 text-xl font-bold md:text-2xl">
                           {project.name}
                         </div>
                         <div class="text-sm opacity-80">{project.subtitle}</div>
                       </div>
-                      <div class="text-sm opacity-70 ml-4">{project.year}</div>
+                      <div class="ml-4 text-sm opacity-70">{project.year}</div>
                     </div>
-                    <div class="text-sm mb-2 opacity-80 border-b border-white inline-block pb-1">
+                    <div class="mb-2 inline-block border-b border-white pb-1 text-sm opacity-80">
                       {project.client}
                     </div>
-                    <p class="text-sm leading-relaxed mb-2 opacity-90">
+                    <p class="mb-2 text-sm leading-relaxed opacity-90">
                       {project.desc}
                     </p>
-                    <div class="text-xs opacity-70 font-bold">
+                    <div class="text-xs font-bold opacity-70">
                       {project.tech}
                     </div>
                   </div>
@@ -268,9 +143,9 @@ const currentYear = new Date().getFullYear();
           }
         </div>
 
-        <div class="mt-12 pt-8 border-t-2 border-white">
+        <div class="mt-12 border-t-2 border-white pt-8">
           <p
-            class="text-sm leading-relaxed opacity-90 border-l-4 border-white pl-4"
+            class="border-l-4 border-white pl-4 text-sm leading-relaxed opacity-90"
           >
             DE CERO A UNO O DE UNO A MILLÓN. CONSTRUIMOS SISTEMAS QUE ESCALAN,
             CÓDIGO QUE PERDURA E INFRAESTRUCTURA QUE NO SE ROMPE A LAS 3AM.
@@ -280,14 +155,12 @@ const currentYear = new Date().getFullYear();
       </div>
     </section>
 
-    <!-- Open Source Section -->
-    <section class="border-t-4 border-black relative">
-      <!-- Vertical text -->
+    <section class="relative border-t-4 border-black">
       <div
-        class="absolute left-2 md:left-4 top-0 bottom-0 z-10 overflow-hidden w-6 md:w-8"
+        class="absolute top-0 bottom-0 left-2 z-10 w-6 overflow-hidden md:left-4 md:w-8"
       >
         <div
-          class="text-xs md:text-base font-bold tracking-wider animate-scroll-vertical whitespace-nowrap"
+          class="animate-scroll-vertical text-xs font-bold tracking-wider whitespace-nowrap md:text-base"
           style="writing-mode: vertical-rl; text-orientation: mixed;"
         >
           CÓDIGO ABIERTO • CÓDIGO ABIERTO • CÓDIGO ABIERTO • CÓDIGO ABIERTO •
@@ -295,9 +168,8 @@ const currentYear = new Date().getFullYear();
         </div>
       </div>
 
-      <!-- Projects List -->
-      <div class="p-8 pl-10 md:p-16 max-w-7xl mx-auto">
-        <h2 class="text-3xl md:text-5xl font-bold mb-12 leading-tight">
+      <div class="mx-auto max-w-7xl p-8 pl-10 md:p-16">
+        <h2 class="mb-12 text-3xl leading-tight font-bold md:text-5xl">
           CONTRIBUCIONES DE CÓDIGO ABIERTO
         </h2>
 
@@ -350,31 +222,31 @@ const currentYear = new Date().getFullYear();
                 number: "05",
               },
             ].map((project) => (
-              <div class="border-b-2 border-black pb-6 border-l-4 border-black pl-4">
-                <div class="flex items-start gap-4 mb-2">
+              <div class="border-b-2 border-l-4 border-black pb-6 pl-4">
+                <div class="mb-2 flex items-start gap-4">
                   <div class="text-3xl font-bold opacity-50">
                     {project.number}
                   </div>
                   <div class="flex-1">
-                    <div class="flex justify-between items-start mb-2">
+                    <div class="mb-2 flex items-start justify-between">
                       <div>
-                        <div class="text-xl md:text-2xl font-bold mb-1">
+                        <div class="mb-1 text-xl font-bold md:text-2xl">
                           {project.name}
                         </div>
                         <div class="text-sm opacity-80">{project.subtitle}</div>
                       </div>
-                      <div class="text-sm opacity-70 ml-4 flex items-center gap-1">
+                      <div class="ml-4 flex items-center gap-1 text-sm opacity-70">
                         <Star size={16} fill="currentColor" />
                         {project.stars}
                       </div>
                     </div>
-                    <div class="text-sm mb-2 opacity-80 border-b border-black inline-block pb-1">
+                    <div class="mb-2 inline-block border-b border-black pb-1 text-sm opacity-80">
                       {project.repo}
                     </div>
-                    <p class="text-sm leading-relaxed mb-2 opacity-90">
+                    <p class="mb-2 text-sm leading-relaxed opacity-90">
                       {project.desc}
                     </p>
-                    <div class="text-xs opacity-70 font-bold">
+                    <div class="text-xs font-bold opacity-70">
                       {project.tech}
                     </div>
                   </div>
@@ -384,9 +256,9 @@ const currentYear = new Date().getFullYear();
           }
         </div>
 
-        <div class="mt-12 pt-8 border-t-2 border-black">
+        <div class="mt-12 border-t-2 border-black pt-8">
           <p
-            class="text-sm leading-relaxed opacity-90 border-l-4 border-black pl-4"
+            class="border-l-4 border-black pl-4 text-sm leading-relaxed opacity-90"
           >
             CREEMOS EN DEVOLVER A LA COMUNIDAD. ESTOS SON LOS PROYECTOS A LOS
             QUE HEMOS CONTRIBUIDO, AYUDANDO A DAR FORMA AL FUTURO DEL DESARROLLO
@@ -397,202 +269,90 @@ const currentYear = new Date().getFullYear();
       </div>
     </section>
 
-    <!-- Philosophy Section - Black Background -->
     <section
       id="about"
-      class="p-8 md:p-16 border-t-4 border-black bg-black text-white relative"
+      class="relative border-t-4 border-black bg-black p-8 text-white md:p-16"
     >
-      <!-- Vertical text -->
       <div
-        class="absolute right-2 md:right-4 top-0 bottom-0 z-10 overflow-hidden w-6 md:w-8"
+        class="absolute top-0 right-2 bottom-0 z-10 w-6 overflow-hidden md:right-4 md:w-8"
       >
         <div
-          class="text-xs md:text-base font-bold tracking-wider animate-scroll-vertical whitespace-nowrap"
+          class="animate-scroll-vertical text-xs font-bold tracking-wider whitespace-nowrap md:text-base"
           style="writing-mode: vertical-rl; text-orientation: mixed;"
         >
-          FILOSOFÍA • FILOSOFÍA • FILOSOFÍA • FILOSOFÍA • FILOSOFÍA • FILOSOFÍA •
-          FILOSOFÍA • FILOSOFÍA • FILOSOFÍA • FILOSOFÍA • FILOSOFÍA • FILOSOFÍA •
+          FILOSOFÍA • FILOSOFÍA • FILOSOFÍA • FILOSOFÍA • FILOSOFÍA • FILOSOFÍA
+          • FILOSOFÍA • FILOSOFÍA • FILOSOFÍA • FILOSOFÍA • FILOSOFÍA •
+          FILOSOFÍA •
         </div>
       </div>
 
-      <div class="max-w-5xl mx-auto pr-10 md:pr-0">
+      <div class="mx-auto max-w-5xl pr-10 md:pr-0">
         <p
-          class="text-3xl md:text-5xl font-bold leading-tight mb-8 border-l-8 border-white pl-6"
+          class="mb-8 border-l-8 border-white pl-6 text-3xl leading-tight font-bold md:text-5xl"
         >
           CONSTRUIMOS SOFTWARE QUE FUNCIONA PARA LAS PERSONAS, NO AL REVÉS
         </p>
 
-        <div class="grid md:grid-cols-2 gap-8 mt-12">
+        <div class="mt-12 grid gap-8 md:grid-cols-2">
           <div class="border-l-4 border-white pl-6">
             <h3
-              class="text-xl md:text-2xl font-bold mb-4 border-b-2 border-white pb-2"
+              class="mb-4 border-b-2 border-white pb-2 text-xl font-bold md:text-2xl"
             >
               NUESTRO PROCESO
             </h3>
-            <p class="text-sm md:text-base leading-relaxed mb-4">
+            <p class="mb-4 text-sm leading-relaxed md:text-base">
               Comenzamos entendiendo tu problema profundamente. Sin soluciones
               prematuras, sin suposiciones. Solo descubrimiento y planificación
               exhaustivos.
             </p>
-            <p class="text-sm md:text-base leading-relaxed mb-4">
-              Luego construimos iterativamente, enviando temprano y con frecuencia.
-              Los ciclos de retroalimentación continuos aseguran que siempre nos
-              movemos en la dirección correcta.
+            <p class="mb-4 text-sm leading-relaxed md:text-base">
+              Luego construimos iterativamente, enviando temprano y con
+              frecuencia. Los ciclos de retroalimentación continuos aseguran que
+              siempre nos movemos en la dirección correcta.
             </p>
-            <p class="text-sm md:text-base leading-relaxed">
-              Creemos en código simple y mantenible que otros puedan entender. Sin
-              trucos ingeniosos, sin complejidad innecesaria.
+            <p class="text-sm leading-relaxed md:text-base">
+              Creemos en código simple y mantenible que otros puedan entender.
+              Sin trucos ingeniosos, sin complejidad innecesaria.
             </p>
           </div>
 
           <div class="border-l-4 border-white pl-6">
             <h3
-              class="text-xl md:text-2xl font-bold mb-4 border-b-2 border-white pb-2"
+              class="mb-4 border-b-2 border-white pb-2 text-xl font-bold md:text-2xl"
             >
               POR QUÉ TRABAJAR CON NOSOTROS
             </h3>
-            <p class="text-sm md:text-base leading-relaxed mb-4">
-              No somos una fábrica. Somos un equipo pequeño que se preocupa por el
-              trabajo que hacemos y las personas con las que trabajamos.
+            <p class="mb-4 text-sm leading-relaxed md:text-base">
+              No somos una fábrica. Somos un equipo pequeño que se preocupa por
+              el trabajo que hacemos y las personas con las que trabajamos.
             </p>
-            <p class="text-sm md:text-base leading-relaxed mb-4">
-              Cada proyecto recibe nuestra completa atención. Estamos involucrados
-              desde la estrategia hasta el despliegue y más allá.
+            <p class="mb-4 text-sm leading-relaxed md:text-base">
+              Cada proyecto recibe nuestra completa atención. Estamos
+              involucrados desde la estrategia hasta el despliegue y más allá.
             </p>
-            <p class="text-sm md:text-base leading-relaxed">
+            <p class="text-sm leading-relaxed md:text-base">
               Nos comunicamos clara y honestamente. Sin jerga, sin sorpresas.
               Siempre sabrás cómo están las cosas.
             </p>
           </div>
         </div>
 
-        <div
-          class="mt-12 pt-8 border-t-4 border-white border-l-4 border-white pl-6"
-        >
+        <div class="mt-12 border-t-4 border-l-4 border-white pt-8 pl-6">
           <h3
-            class="text-xl md:text-2xl font-bold mb-4 border-b-2 border-white pb-2"
+            class="mb-4 border-b-2 border-white pb-2 text-xl font-bold md:text-2xl"
           >
             CLIENTES
           </h3>
-          <p class="text-sm md:text-base leading-relaxed">
+          <p class="text-sm leading-relaxed md:text-base">
             Hemos trabajado con startups recaudando su primera ronda, empresas
-            establecidas modernizando sistemas legacy y todo lo intermedio. Lo que
-            tienen en común: una visión de mejor software y disposición para hacer
-            las cosas bien.
+            establecidas modernizando sistemas legacy y todo lo intermedio. Lo
+            que tienen en común: una visión de mejor software y disposición para
+            hacer las cosas bien.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer id="contact" class="border-t-4 border-black p-8 md:p-16">
-      <div class="max-w-6xl mx-auto">
-        <div class="mb-12 pb-12 border-b-4 border-black">
-          <h2 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">
-            CONSTRUYAMOS ALGO QUE ENVÍE
-          </h2>
-          <p class="text-lg md:text-xl opacity-90 border-l-4 border-black pl-4">
-            ¿LISTO PARA MOVERTE RÁPIDO Y CONSTRUIR COSAS? HABLEMOS.
-          </p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8 mb-8">
-          <div class="border-l-4 border-black pl-4">
-            <div
-              class="font-bold mb-2 text-sm border-b-2 border-black pb-1 inline-block"
-            >
-              CONTACTO
-            </div>
-            <div class="text-sm leading-relaxed">
-              <div>
-                INFO<span class="opacity-50">[at]</span>BLACKTAR<span
-                  class="opacity-50">[dot]</span
-                >WORKS
-              </div>
-              <div class="opacity-70 mt-2">
-                Para consultas de proyectos, asociaciones o preguntas generales.
-              </div>
-            </div>
-          </div>
-
-          <div class="border-l-4 border-black pl-4">
-            <div
-              class="font-bold mb-2 text-sm border-b-2 border-black pb-1 inline-block"
-            >
-              UBICACIÓN
-            </div>
-            <div class="text-sm leading-relaxed">
-              <div>PRIMERO REMOTO</div>
-              <div class="opacity-70 mt-2">
-                Trabajamos con clientes en todo el mundo. Con base principalmente en
-                América del Norte y Europa.
-              </div>
-            </div>
-          </div>
-
-          <div class="border-l-4 border-black pl-4">
-            <div
-              class="font-bold mb-2 text-sm border-b-2 border-black pb-1 inline-block"
-            >
-              CONECTAR
-            </div>
-            <div class="text-sm leading-relaxed space-y-2">
-              <a
-                href="https://github.com/blacktarhq"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center gap-2 hover:opacity-70 transition-opacity"
-              >
-                <Github size={20} />
-                <span>GITHUB.COM/BLACKTARHQ</span>
-              </a>
-              <a
-                href="https://x.com/blacktarhq"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center gap-2 hover:opacity-70 transition-opacity"
-              >
-                <svg
-                  class="inline-block"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"
-                  ></path>
-                </svg>
-                <span>X.COM/BLACKTARHQ</span>
-              </a>
-              <a
-                href="https://linkedin.com/company/blacktarhq"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center gap-2 hover:opacity-70 transition-opacity"
-              >
-                <Linkedin size={20} />
-                <span>LINKEDIN.COM/COMPANY/BLACKTARHQ</span>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="border-t-4 border-black pt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs"
-        >
-          <div class="font-bold border-l-4 border-black pl-4">
-            © {currentYear} BLACKTAR ENGINEERING WORKS. TODOS LOS DERECHOS
-            RESERVADOS.
-          </div>
-          <div class="flex gap-4 opacity-70">
-            <a href="/es/privacy" class="border-l-2 border-black pl-2 hover:opacity-100 transition-opacity">POLÍTICA DE PRIVACIDAD</a>
-            <a href="/es/terms" class="border-l-2 border-black pl-2 hover:opacity-100 transition-opacity">TÉRMINOS DE SERVICIO</a>
-          </div>
-        </div>
-      </div>
-    </footer>
+    <Footer locale="es" />
   </div>
 </BaseLayout>
